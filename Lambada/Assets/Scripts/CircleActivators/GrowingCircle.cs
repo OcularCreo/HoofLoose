@@ -32,6 +32,9 @@ public class GrowingCircle : MonoBehaviour
                 transform.localScale = Vector3.zero;
                 gameManager.combo = 0;
                 gameManager.failCounter++;
+
+                activator.GetComponent<CircleActivator>().missed();
+
                 activator.SetActive(false);
             }
         }

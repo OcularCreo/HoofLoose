@@ -14,6 +14,10 @@ public class CircleActivator : MonoBehaviour
 
     //particles
     [SerializeField] GameObject perfectParticle;
+    [SerializeField] GameObject greatParticle;
+    [SerializeField] GameObject goodParticle;
+    [SerializeField] GameObject missedParticle;
+    [SerializeField] Transform particleSpawnTrans;
 
     [SerializeField] private TextMeshProUGUI keyText;
 
@@ -33,48 +37,41 @@ public class CircleActivator : MonoBehaviour
             //calulate what percentage of the indicator's scale is of the static circle
             float scalePercentage = circleIndicator.lossyScale.x / transform.localScale.x;
 
+            bool success = false;
+
             //check what percentage the size the indicator is relative to the static circle
             if(scalePercentage < 0.6)
             {
-                Debug.Log("too early");
-                gameManager.combo = 0;
-                gameManager.failCounter++;
+                missed();
             } else if(scalePercentage >= 0.6 && scalePercentage < 0.85)
             {
-                Debug.Log("good!");
+                Instantiate(goodParticle, particleSpawnTrans.position, Quaternion.identity);
                 gameManager.combo += 1;
-
-                if(gameManager.failCounter > 0)
-                {
-                    gameManager.failCounter = 0;
-                }
                
             } else if(scalePercentage >= 0.85 && scalePercentage <0.9)
             {
-                Debug.Log("Great!");
+                Instantiate(greatParticle, particleSpawnTrans.position, Quaternion.identity);
                 gameManager.combo += 1;
-
-                if (gameManager.failCounter > 0)
-                {
-                    gameManager.failCounter = 0;
-                }
 
             } else if(scalePercentage >= 0.9 && scalePercentage <= 1.05)
             {
                 gameManager.combo += 2;
-                Instantiate(perfectParticle, gameObject.transform.position, Quaternion.identity);
-
-                if (gameManager.failCounter > 0)
-                {
-                    gameManager.failCounter = 0;
-                }
-
+                Instantiate(perfectParticle, particleSpawnTrans.position, Quaternion.identity);
             } 
             else if (scalePercentage > 1.05)
             {
-                Debug.Log("Missed!");
-                gameManager.combo = 0;
-                gameManager.failCounter++;
+                missed();
+            }
+
+            //if the player successful in any way and the fail counter is greater than 0
+            if(success)
+            {
+                gameManager.failCounter = 0;    //reset the fail counter
+            } 
+            //if the player was not succesful
+            else
+            {
+                gameManager.failCounter++;      
             }
 
             circleIndicator.localScale = Vector3.zero;
@@ -87,6 +84,12 @@ public class CircleActivator : MonoBehaviour
             circleIndicator.localScale = Vector3.zero;
             gameObject.SetActive(false);
         }
+    }
+
+    public void missed()
+    {
+        gameManager.failCounter++;
+        Instantiate(missedParticle, particleSpawnTrans.position, Quaternion.identity);
     }
 
 }
