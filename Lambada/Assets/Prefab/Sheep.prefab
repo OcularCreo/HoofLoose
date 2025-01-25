@@ -159,8 +159,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1865109033
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a5443c498a71f914a95302f6622783d4, type: 3}
   m_Color: {r: 0.5749436, g: 0.8050314, b: 0.5392191, a: 1}
@@ -247,17 +247,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90278f73f4b9cc4da0c0b27c10138f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 1
-  maxForce: 1
-  followWeight: 1
-  separationWeight: 2
-  cohesionWeight: 1
-  separationRadius: 1
-  cohesionRadius: 10
-  followRadius: 20
-  player: {fileID: 0}
-  flockmates: []
-  moveSpeed: 3
 --- !u!114 &2443092963864673892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,5 +263,6 @@ MonoBehaviour:
   lerpDurationX: 0.05
   lerpDurationY: 0.05
   delayBeforeX: 0.03
-  onKey: 0
+  onAnyKey: 0
   onAlive: 0
+  keycode: 
