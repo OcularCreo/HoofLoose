@@ -22,6 +22,16 @@ public class SheepBehaviour : MonoBehaviour
     private Vector3 velocity; // Current velocity of the sheep
 
 
+
+    public float moveSpeed = 1f; // Movement speed of the GameObject
+    public Vector2 areaMin = new Vector2(-4f, -4f); // Bottom-left corner of the area
+    public Vector2 areaMax = new Vector2(2f, 2f); // Top-right corner of the area
+    public float changeDirectionInterval = 2f; // Time interval before changing direction
+
+    private float timeSinceLastDirectionChange = 0f;
+    private Vector2 currentDirection;
+
+
     //STATES
     public enum SheepState
     {
@@ -33,7 +43,7 @@ public class SheepBehaviour : MonoBehaviour
     private GameObject[] grazePoints;
     private GameObject currentGrazePoint;
 
-    public float moveSpeed = 3f;
+    //public float moveSpeed = 3f;
 
     //DANCING
     private float rotationInterval = 1f; // Time interval (in seconds) between each 45-degree rotation
@@ -41,6 +51,8 @@ public class SheepBehaviour : MonoBehaviour
 
     private void Start()
     {
+        SetRandomDirection();
+
         if (player == null)    
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -75,7 +87,7 @@ public class SheepBehaviour : MonoBehaviour
             }*/
         }
     }
-
+    /*
     private void Flock() 
     {
         // Update flockmates (other sheep in the flock)
@@ -191,6 +203,7 @@ public class SheepBehaviour : MonoBehaviour
 
         return force;
     }
+    */
 
     private void GrazeUpdate()
     {
@@ -207,8 +220,35 @@ public class SheepBehaviour : MonoBehaviour
 
     private void DanceUpdate()
     {
-        Flock();
+        //Flock();
+
+        timeSinceLastDirectionChange += Time.deltaTime;
+
+        // Change direction after the specified interval
+        if (timeSinceLastDirectionChange >= changeDirectionInterval)
+        {
+            SetRandomDirection();
+            timeSinceLastDirectionChange = 0f;
+        }
+
+        // Move the GameObject in the current direction
+        transform.Translate(currentDirection * moveSpeed * Time.deltaTime);
+
+        // Make sure the GameObject stays within the specified area
+        Vector3 position = transform.position;
+        position.x = Mathf.Clamp(position.x, areaMin.x, areaMax.x);
+        position.y = Mathf.Clamp(position.y, areaMin.y, areaMax.y);
+        transform.position = position;
+
+
         Dance();
+    }
+
+    void SetRandomDirection()
+    {
+        // Pick a random direction
+        float randomAngle = Random.Range(0f, 360f);
+        currentDirection = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)).normalized;
     }
 
     private void Dance() 
