@@ -14,37 +14,45 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI comboTxt;
     [SerializeField] private TextMeshProUGUI sheepTxt;
-    
+
     private List<GameObject> keyActivatorsList;
     private bool shiftDown;
-    
+
     private float time = 0;
 
     [SerializeField] private SheepManager sheepManager;
 
+    [SerializeField] private ParticleSystem poseParticle;
+    private GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
-        if (sheepManager == null) 
+        if (sheepManager == null)
         {
             sheepManager = GameObject.FindGameObjectWithTag("SheepManager").GetComponent<SheepManager>();
+        }
+
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
         }
 
         shiftDown = false;
 
         resetKeyList();
 
-        StartCoroutine(activate(0)); 
+        StartCoroutine(activate(0));
 
     }
 
-    private void resetKeyList ()
+    private void resetKeyList()
     {
         if (keyActivatorsList != null)
         {
             keyActivatorsList.Clear();                  //clear the list
         }
-        
+
         keyActivatorsList = new List<GameObject>();     //allocate the list
 
         //add each item to the list
@@ -58,38 +66,38 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(failCounter > 2)
+        if (failCounter > 2)
         {
             lives--;
             failCounter = 0;
         }
 
-        if(Input.GetKeyDown(KeyCode.LeftShift) ||  Input.GetKeyDown(KeyCode.RightShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
         {
             shiftDown = true;
             StopCoroutine("activate");
             time = Time.time;
 
-        } else if(Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
+        } else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
         {
             shiftDown = false;
             StartCoroutine(activate(0));
-            
+
             float elapsedTime = Time.time - time;
 
-            if(elapsedTime >= 3)
+            if (elapsedTime >= 3)
             {
                 lives--;
                 time = Time.time;
             }
-            
+
             time = 0;
         }
 
         //when player hits the pose button
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            
+
             int iterations = combo / 8; //check if their combo is high enough to gain sheep
             int gainedLives = 0;        //variable to count how many lives they gained
 
@@ -97,22 +105,23 @@ public class GameManager : MonoBehaviour
             int prev = 0;
             int next = 1;
 
-            for(int i = 0; i < iterations; i++)
+            for (int i = 0; i < iterations; i++)
             {
                 gainedLives = prev + next;
-                prev = next; 
+                prev = next;
                 next = gainedLives;
             }
 
             lives += gainedLives;       //add the amount of lives they gained
-            if (sheepManager) 
+            if (sheepManager && player)
             {
                 sheepManager.SubmitCombo(gainedLives); //add sheep to represent lives
+                PoseParticle();
             }
             combo = 0;                  //reset their combo to zero
         }
 
-        if (comboTxt && sheepTxt) 
+        if (comboTxt && sheepTxt)
         {
             comboTxt.text = "Combo: " + combo.ToString();
             sheepTxt.text = "Sheep: " + lives.ToString();
@@ -121,10 +130,10 @@ public class GameManager : MonoBehaviour
 
     IEnumerator activate(float waitTime)
     {
-        
+
         yield return new WaitForSecondsRealtime(waitTime);
 
-        if(!shiftDown)
+        if (!shiftDown)
         {
             resetKeyList();
             activateKey();
@@ -137,19 +146,27 @@ public class GameManager : MonoBehaviour
 
             StartCoroutine(activate(1.25f));
         }
-        
+
     }
 
-    IEnumerator activateSecondary (float waitTime)
+    IEnumerator activateSecondary(float waitTime)
     {
         yield return new WaitForSecondsRealtime(waitTime);
         activateKey();
     }
 
-    private void activateKey ()
+    private void activateKey()
     {
         int selectedIdx = Random.Range(0, keyActivatorsList.Count);
         keyActivatorsList[selectedIdx].SetActive(true);
         keyActivatorsList.RemoveAt(selectedIdx);
+    }
+
+    private void PoseParticle()
+    {
+        if (poseParticle) 
+        {
+            Instantiate(poseParticle, player.transform.position, Quaternion.identity);
+        }
     }
 }

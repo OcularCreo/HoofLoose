@@ -1078,6 +1078,7 @@ MonoBehaviour:
   comboTxt: {fileID: 0}
   sheepTxt: {fileID: 0}
   sheepManager: {fileID: 1646107585}
+  poseParticle: {fileID: 428663240816499472, guid: 2b576b860c1160c4aa8f1cc86a985c3f, type: 3}
 --- !u!4 &1280623241
 Transform:
   m_ObjectHideFlags: 0
