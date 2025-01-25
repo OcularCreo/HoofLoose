@@ -69,6 +69,12 @@ public class GameManager : MonoBehaviour
         if (failCounter > 2)
         {
             lives--;
+            if (lives < 0) 
+            {
+                lives = 0;
+            }
+
+            sheepManager.KillSheep(1);
             failCounter = 0;
         }
 
