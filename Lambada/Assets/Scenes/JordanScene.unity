@@ -139,6 +139,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: d_activator
       objectReference: {fileID: 0}
+    - target: {fileID: 2564439534263323173, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4598376305504589175, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.57
@@ -181,12 +185,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6114731845197321462, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
       propertyPath: keyToPress
-      value: 100
+      value: 273
       objectReference: {fileID: 0}
     - target: {fileID: 6114731845197321462, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1223183309}
+    - target: {fileID: 6114731845197321462, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
+      propertyPath: growthSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9079989882373805033, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
       propertyPath: gameManager
       value: 
@@ -281,6 +289,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: j_activator
       objectReference: {fileID: 0}
+    - target: {fileID: 2564439534263323173, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4598376305504589175, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.37
@@ -329,6 +341,10 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1223183309}
+    - target: {fileID: 6114731845197321462, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
+      propertyPath: growthSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9079989882373805033, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
       propertyPath: gameManager
       value: 
@@ -349,6 +365,10 @@ PrefabInstance:
     - target: {fileID: 2564439534263323173, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
       propertyPath: m_Name
       value: k_activator
+      objectReference: {fileID: 0}
+    - target: {fileID: 2564439534263323173, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4598376305504589175, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
       propertyPath: m_LocalPosition.x
@@ -398,6 +418,10 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1223183309}
+    - target: {fileID: 6114731845197321462, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
+      propertyPath: growthSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9079989882373805033, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
       propertyPath: gameManager
       value: 
@@ -437,12 +461,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combo: 0
+  failCounter: 0
+  lives: 0
   keyActivators:
   - {fileID: 1336888243}
   - {fileID: 743148064}
   - {fileID: 59065988}
   - {fileID: 1596560889}
-  foo: {fileID: 0}
 --- !u!4 &1223183310
 Transform:
   m_ObjectHideFlags: 0
@@ -617,6 +642,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: f_activator
       objectReference: {fileID: 0}
+    - target: {fileID: 2564439534263323173, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4598376305504589175, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.15
@@ -665,6 +694,10 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1223183309}
+    - target: {fileID: 6114731845197321462, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
+      propertyPath: growthSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9079989882373805033, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
       propertyPath: gameManager
       value: 

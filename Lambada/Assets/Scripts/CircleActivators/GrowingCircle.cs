@@ -19,14 +19,6 @@ public class GrowingCircle : MonoBehaviour
         transform.localScale = Vector3.zero;
     }
 
-    /*
-    private void OnEnable()
-    {
-        Debug.Log("On enabled called growing");
-        grow = true;
-    }
-    */
-
     // Update is called once per frame
     void Update()
     {
