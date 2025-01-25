@@ -47,16 +47,19 @@ public class CircleActivator : MonoBehaviour
             {
                 Instantiate(goodParticle, particleSpawnTrans.position, Quaternion.identity);
                 gameManager.combo += 1;
+                success = true;
                
             } else if(scalePercentage >= 0.85 && scalePercentage <0.9)
             {
                 Instantiate(greatParticle, particleSpawnTrans.position, Quaternion.identity);
                 gameManager.combo += 1;
+                success = true;
 
             } else if(scalePercentage >= 0.9 && scalePercentage <= 1.05)
             {
                 gameManager.combo += 2;
                 Instantiate(perfectParticle, particleSpawnTrans.position, Quaternion.identity);
+                success = true;
             } 
             else if (scalePercentage > 1.05)
             {
@@ -71,7 +74,8 @@ public class CircleActivator : MonoBehaviour
             //if the player was not succesful
             else
             {
-                gameManager.failCounter++;      
+                gameManager.failCounter++;
+                gameManager.combo = 0;
             }
 
             circleIndicator.localScale = Vector3.zero;
