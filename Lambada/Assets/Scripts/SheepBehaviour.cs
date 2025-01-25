@@ -4,29 +4,10 @@ using UnityEngine;
 
 public class SheepBehaviour : MonoBehaviour
 {
-    //FLOCKING
-    public float maxSpeed = 5f;
-    public float maxForce = 1f;
-
-    public float followWeight = 1f; // How strongly the sheep follow the player
-    public float separationWeight = 1.5f; // How strongly the sheep avoid each other
-    public float cohesionWeight = 1f; // How strongly the sheep stay together
-
-    public float separationRadius = 2f; // Distance to stay away from other sheep
-    public float cohesionRadius = 10f; // Distance to consider for flock cohesion
-    public float followRadius = 20f; // Distance where sheep start following the player
-
-    public Transform player; // Reference to the player's position
-    public List<Transform> flockmates = new List<Transform>(); // List of other sheep
-
-    private Vector3 velocity; // Current velocity of the sheep
-
-
-
-    public float moveSpeed = 1f; // Movement speed of the GameObject
-    public Vector2 areaMin = new Vector2(-4f, -4f); // Bottom-left corner of the area
-    public Vector2 areaMax = new Vector2(2f, 2f); // Top-right corner of the area
-    public float changeDirectionInterval = 2f; // Time interval before changing direction
+    private float moveSpeed = 1f; // Movement speed of the GameObject
+    private Vector2 areaMin = new Vector2(-5f, -2.45f); // Bottom-left corner of the area
+    private Vector2 areaMax = new Vector2(5f, -0.5f); // Top-right corner of the area
+    private float changeDirectionInterval = 2f; // Time interval before changing direction
 
     private float timeSinceLastDirectionChange = 0f;
     private Vector2 currentDirection;
@@ -53,158 +34,21 @@ public class SheepBehaviour : MonoBehaviour
     {
         SetRandomDirection();
 
-        if (player == null)    
-        {
-            player = GameObject.FindGameObjectWithTag("Player").transform;
-        }
     }
 
     void Update()
     {
-        if (player)
+        switch (currentState)
         {
-            switch (currentState)
-            {
-                case SheepState.Graze:
-                    GrazeUpdate();
-                    break;
-                case SheepState.Dance:
-                    DanceUpdate();
-                    break;
-            }
-
-            // Press 'N' to switch to Dance state
-           /* if (Input.GetKeyDown(KeyCode.N))
-            {
-                if (currentState == SheepState.Graze)
-                {
-                    TransitionToDanceState();
-                }
-                else
-                {
-                    //TransitionToGrazeState();
-                }
-            }*/
+            case SheepState.Graze:
+                GrazeUpdate();
+                break;
+            case SheepState.Dance:
+                DanceUpdate();
+                break;
         }
     }
-    /*
-    private void Flock() 
-    {
-        // Update flockmates (other sheep in the flock)
-        UpdateFlockmates();
-
-        // Compute the forces applied to the sheep
-        Vector3 followForce = FollowPlayer();
-        Vector3 separationForce = Separation();
-        Vector3 cohesionForce = Cohesion();
-
-        // Combine all forces
-        Vector3 steering = followForce * followWeight + separationForce * separationWeight + cohesionForce * cohesionWeight;
-
-        // Apply the steering force to the velocity
-        velocity += steering * Time.deltaTime;
-
-        // Limit the velocity to the max speed
-        velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
-
-        // Move the sheep
-        transform.position += velocity * Time.deltaTime;
-    }
-
-    void UpdateFlockmates()
-    {
-        flockmates.Clear();
-        foreach (var sheep in FindObjectsOfType<SheepBehaviour>())
-        {
-            if (sheep != this) // Avoid adding itself to the list
-            {
-                flockmates.Add(sheep.transform);
-            }
-        }
-    }
-
-    Vector3 FollowPlayer()
-    {
-        Vector3 desired = player.position - transform.position;
-        float distance = desired.magnitude;
-
-        // Only follow if within the followRadius
-        if (distance < followRadius)
-        {
-            desired.Normalize();
-            desired *= maxSpeed;
-            Vector3 steer = desired - velocity;
-            return Vector3.ClampMagnitude(steer, maxForce);
-        }
-
-        return Vector3.zero;
-    }
-
-    Vector3 Separation()
-    {
-        Vector3 force = Vector3.zero;
-        int count = 0;
-
-        foreach (var flockmate in flockmates)
-        {
-            float distance = Vector3.Distance(transform.position, flockmate.position);
-
-            if (distance < separationRadius)
-            {
-                Vector3 diff = transform.position - flockmate.position;
-                diff.Normalize();
-                diff /= distance; // The closer the sheep, the stronger the repulsion
-                force += diff;
-                count++;
-            }
-        }
-
-        if (count > 0)
-        {
-            force /= count;
-        }
-
-        if (force.magnitude > 0)
-        {
-            force.Normalize();
-            force *= maxSpeed;
-            force -= velocity;
-            force = Vector3.ClampMagnitude(force, maxForce);
-        }
-
-        return force;
-    }
-
-    Vector3 Cohesion()
-    {
-        Vector3 force = Vector3.zero;
-        int count = 0;
-
-        foreach (var flockmate in flockmates)
-        {
-            float distance = Vector3.Distance(transform.position, flockmate.position);
-
-            if (distance < cohesionRadius)
-            {
-                force += flockmate.position;
-                count++;
-            }
-        }
-
-        if (count > 0)
-        {
-            force /= count;
-            force -= transform.position;
-            force.Normalize();
-            force *= maxSpeed;
-            force -= velocity;
-            force = Vector3.ClampMagnitude(force, maxForce);
-        }
-
-        return force;
-    }
-    */
-
+    
     private void GrazeUpdate()
     {
         if (currentGrazePoint != null && Vector3.Distance(transform.position, currentGrazePoint.transform.position) > 0.5f)
@@ -220,8 +64,6 @@ public class SheepBehaviour : MonoBehaviour
 
     private void DanceUpdate()
     {
-        //Flock();
-
         timeSinceLastDirectionChange += Time.deltaTime;
 
         // Change direction after the specified interval
@@ -309,5 +151,19 @@ public class SheepBehaviour : MonoBehaviour
     public SheepState GetState() 
     {
         return currentState;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue; // Set color for the boundaries
+
+        // Draw a rectangle to show the spawn area
+        Vector2 bottomLeft = areaMin;
+        Vector2 topRight = areaMax;
+
+        Gizmos.DrawLine(bottomLeft, new Vector2(areaMax.x, areaMin.y)); // Bottom line
+        Gizmos.DrawLine(new Vector2(areaMax.x, areaMin.y), topRight); // Right line
+        Gizmos.DrawLine(topRight, new Vector2(areaMin.x, areaMax.y)); // Top line
+        Gizmos.DrawLine(new Vector2(areaMin.x, areaMax.y), bottomLeft); // Left line
     }
 }

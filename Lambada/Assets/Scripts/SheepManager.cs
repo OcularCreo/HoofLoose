@@ -22,10 +22,11 @@ public class SheepManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetKeyDown("l")) 
         {
             SubmitCombo(20);
-        }/*
+        }
         if (Input.GetKeyDown("k"))
         {
             KillSheep(15);
