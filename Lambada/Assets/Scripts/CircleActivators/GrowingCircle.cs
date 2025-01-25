@@ -6,7 +6,7 @@ public class GrowingCircle : MonoBehaviour
 {
     [SerializeField] GameManager gameManager;
     [SerializeField] GameObject activator;
-    
+
     public bool grow;
     
     [SerializeField] private float growSpeed;
@@ -31,6 +31,7 @@ public class GrowingCircle : MonoBehaviour
             {
                 transform.localScale = Vector3.zero;
                 gameManager.combo = 0;
+                gameManager.failCounter++;
                 activator.SetActive(false);
             }
         }

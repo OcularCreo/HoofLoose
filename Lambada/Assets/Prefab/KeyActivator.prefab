@@ -103,6 +103,7 @@ MonoBehaviour:
   circleIndicator: {fileID: 5078839259707829588}
   growthSpeed: 0
   keyToPress: 115
+  perfectParticle: {fileID: 6280913621831229176, guid: 3407d8d6f89a8b24da9c02be8322d919, type: 3}
   keyText: {fileID: 597941728791575268}
 --- !u!1 &2782436196999728835
 GameObject:
