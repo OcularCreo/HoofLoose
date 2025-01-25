@@ -7,7 +7,7 @@ public class SheepBehaviour : MonoBehaviour
     private float moveSpeed = 1f; // Movement speed of the GameObject
     private Vector2 areaMin = new Vector2(-5f, -2.45f); // Bottom-left corner of the area
     private Vector2 areaMax = new Vector2(5f, -0.5f); // Top-right corner of the area
-    private float changeDirectionInterval = 2f; // Time interval before changing direction
+    private float changeDirectionInterval = 1f; // Time interval before changing direction
 
     private float timeSinceLastDirectionChange = 0f;
     private Vector2 currentDirection;
