@@ -354,7 +354,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 442198268}
-  - component: {fileID: 442198269}
   - component: {fileID: 442198270}
   m_Layer: 0
   m_Name: Player
@@ -380,24 +379,6 @@ Transform:
   - {fileID: 1467673844}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &442198269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 442198267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84c237167707a1e45a28f11e7b7a690f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetGrowthPercent: 1.4
-  lerpDurationX: 0.05
-  lerpDurationY: 0.05
-  delayBeforeX: 0.03
-  onKey: 1
-  onAlive: 0
 --- !u!58 &442198270
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -591,10 +572,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sheepPrefab: {fileID: 5762891991001760034, guid: a6a754e659e8e6b4882fc83b7d13a136, type: 3}
-  minX: -8
-  maxX: 8
-  minY: -4
-  maxY: 4
+  minX: -10.5
+  maxX: 10.5
+  minY: 5.39
+  maxY: 7.53
 --- !u!4 &673712118
 Transform:
   m_ObjectHideFlags: 0
@@ -723,6 +704,7 @@ GameObject:
   - component: {fileID: 958021824}
   - component: {fileID: 958021826}
   - component: {fileID: 958021825}
+  - component: {fileID: 958021827}
   m_Layer: 0
   m_Name: GFX
   m_TagString: Untagged
@@ -802,7 +784,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: cfc981cd3af6f2243a717664bd307362, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -814,6 +796,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &958021827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958021823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84c237167707a1e45a28f11e7b7a690f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetGrowthPercent: 1.4
+  lerpDurationX: 0.05
+  lerpDurationY: 0.05
+  delayBeforeX: 0.03
+  onKey: 1
+  onAlive: 0
 --- !u!1 &1212032603
 GameObject:
   m_ObjectHideFlags: 0
