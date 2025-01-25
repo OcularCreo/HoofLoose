@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SheepBehavior : MonoBehaviour
+public class SheepBehaviour : MonoBehaviour
 {
+    //FLOCKING
     public float maxSpeed = 5f;
     public float maxForce = 1f;
 
@@ -20,7 +21,9 @@ public class SheepBehavior : MonoBehaviour
 
     private Vector3 velocity; // Current velocity of the sheep
 
-    private enum SheepState
+
+    //STATES
+    public enum SheepState
     {
         Graze,
         Dance
@@ -31,6 +34,10 @@ public class SheepBehavior : MonoBehaviour
     private GameObject currentGrazePoint;
 
     public float moveSpeed = 3f;
+
+    //DANCING
+    private float rotationInterval = 1f; // Time interval (in seconds) between each 45-degree rotation
+    private float timer;
 
     private void Start()
     {
@@ -95,7 +102,7 @@ public class SheepBehavior : MonoBehaviour
     void UpdateFlockmates()
     {
         flockmates.Clear();
-        foreach (var sheep in FindObjectsOfType<SheepBehavior>())
+        foreach (var sheep in FindObjectsOfType<SheepBehaviour>())
         {
             if (sheep != this) // Avoid adding itself to the list
             {
@@ -201,6 +208,23 @@ public class SheepBehavior : MonoBehaviour
     private void DanceUpdate()
     {
         Flock();
+        Dance();
+    }
+
+    private void Dance() 
+    {
+        // Increment the timer by the time passed since the last frame
+        timer += Time.deltaTime;
+
+        // Check if the specified interval has passed
+        if (timer >= rotationInterval)
+        {
+            // Rotate the object by 45 degrees around the Z-axis (2D rotation)
+            transform.Rotate(0, 0, 45);
+
+            // Reset the timer
+            timer = 0f;
+        }
     }
 
     private void ChooseNewGrazePoint()
@@ -235,5 +259,10 @@ public class SheepBehavior : MonoBehaviour
     {
         currentState = SheepState.Dance;
         // You can add a transition animation or behavior here if needed.
+    }
+
+    public SheepState GetState() 
+    {
+        return currentState;
     }
 }

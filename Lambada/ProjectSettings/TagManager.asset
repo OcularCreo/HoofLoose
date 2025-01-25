@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Audio
   - GrazePoint
+  - Sheep
   layers:
   - Default
   - TransparentFX
