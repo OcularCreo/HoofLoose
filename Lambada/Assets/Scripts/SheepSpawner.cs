@@ -11,13 +11,41 @@ public class SheepSpawner : MonoBehaviour
     [SerializeField] private float minY = -4f;
     [SerializeField] private float maxY = 4f;
 
+    private string sheepTag = "Sheep"; // Tag to identify sheep
+    private int maxSheepCount = 10; // Maximum number of sheep allowed in the scene
+    private float spawnInterval = 5f; // Initial time interval for spawning sheep
+    private float intervalDecrement = 0.1f; // How much the interval will decrease over time
+    private float minInterval = 1f; // Minimum spawn interval
+
+    private float currentInterval; // Current spawn interval
+    private float timeSinceLastSpawn; // Time passed since the last spawn
+
+    private void Start()
+    {
+        currentInterval = spawnInterval; // Set the initial interval
+        timeSinceLastSpawn = 0f; // Initialize the timer
+    }
+
     // Update is called once per frame
     void Update()
     {
-        // Check if the "M" key is pressed
-        if (Input.GetKeyDown(KeyCode.M))
+        // Count the number of sheep in the scene
+        int sheepCount = GameObject.FindGameObjectsWithTag(sheepTag).Length;
+
+        // If the number of sheep is less than the maximum, attempt to spawn a new one
+        if (sheepCount < maxSheepCount)
         {
-            SpawnSheep();
+            timeSinceLastSpawn += Time.deltaTime;
+
+            // If enough time has passed, spawn a new sheep
+            if (timeSinceLastSpawn >= currentInterval)
+            {
+                SpawnSheep();
+                timeSinceLastSpawn = 0f; // Reset the timer after spawning
+
+                // Decrease the interval, but make sure it doesn't go below the minimum
+                currentInterval = Mathf.Max(currentInterval - intervalDecrement, minInterval);
+            }
         }
     }
 
