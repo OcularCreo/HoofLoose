@@ -254,13 +254,13 @@ public class SheepBehaviour : MonoBehaviour
         }
     }
 
-    private void TransitionToGrazeState()
+    public void TransitionToGrazeState()
     {
         currentState = SheepState.Graze;
         ChooseNewGrazePoint();
     }
 
-    private void TransitionToDanceState()
+    public void TransitionToDanceState()
     {
         currentState = SheepState.Dance;
         // You can add a transition animation or behavior here if needed.

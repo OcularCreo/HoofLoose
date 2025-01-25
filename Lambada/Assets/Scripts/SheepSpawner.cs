@@ -12,7 +12,7 @@ public class SheepSpawner : MonoBehaviour
     [SerializeField] private float maxY = 4f;
 
     private string sheepTag = "Sheep"; // Tag to identify sheep
-    private int maxSheepCount = 10; // Maximum number of sheep allowed in the scene
+    private int maxSheepCount = 15; // Maximum number of sheep allowed in the scene
     private float spawnInterval = 5f; // Initial time interval for spawning sheep
     private float intervalDecrement = 0.1f; // How much the interval will decrease over time
     private float minInterval = 1f; // Minimum spawn interval
@@ -40,7 +40,7 @@ public class SheepSpawner : MonoBehaviour
             // If enough time has passed, spawn a new sheep
             if (timeSinceLastSpawn >= currentInterval)
             {
-                SpawnSheep();
+                SpawnSheep(1);
                 timeSinceLastSpawn = 0f; // Reset the timer after spawning
 
                 // Decrease the interval, but make sure it doesn't go below the minimum
@@ -50,7 +50,21 @@ public class SheepSpawner : MonoBehaviour
     }
 
     // Method to spawn a sheep at a random position
-    void SpawnSheep()
+    public void SpawnSheep(int sheepToSpawn)
+    {
+        for (int i = 0; i < sheepToSpawn; i++)
+        {
+            // Generate a random position within the specified bounds
+            float randomX = Random.Range(minX, maxX);
+            float randomY = Random.Range(minY, maxY);
+
+            // Instantiate the sheep prefab at the random position
+            Vector2 spawnPosition = new Vector2(randomX, randomY);
+            Instantiate(sheepPrefab, spawnPosition, Quaternion.identity);
+        }
+    }
+
+    public GameObject SpawnSheepReturnSheep() 
     {
         // Generate a random position within the specified bounds
         float randomX = Random.Range(minX, maxX);
@@ -58,7 +72,8 @@ public class SheepSpawner : MonoBehaviour
 
         // Instantiate the sheep prefab at the random position
         Vector2 spawnPosition = new Vector2(randomX, randomY);
-        Instantiate(sheepPrefab, spawnPosition, Quaternion.identity);
+        GameObject sheep = Instantiate(sheepPrefab, spawnPosition, Quaternion.identity);
+        return sheep;
     }
 
     // Draw the boundaries in the editor
