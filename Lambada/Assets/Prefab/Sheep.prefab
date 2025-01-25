@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 888555874900998995}
   m_Layer: 0
   m_Name: Sheep
-  m_TagString: Untagged
+  m_TagString: Sheep
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.38128, y: 0.38128, z: 0.38128}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -98,16 +98,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90278f73f4b9cc4da0c0b27c10138f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 10
+  maxSpeed: 1
   maxForce: 1
-  followWeight: 4
-  separationWeight: 10
+  followWeight: 1
+  separationWeight: 2
   cohesionWeight: 1
-  separationRadius: 0.5
+  separationRadius: 1
   cohesionRadius: 10
   followRadius: 20
   player: {fileID: 0}
   flockmates: []
+  moveSpeed: 3
 --- !u!50 &888555874900998995
 Rigidbody2D:
   serializedVersion: 4
