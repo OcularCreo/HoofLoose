@@ -12,6 +12,9 @@ public class CircleActivator : MonoBehaviour
     [SerializeField] private float growthSpeed;
     [SerializeField] private KeyCode keyToPress;
 
+    //particles
+    [SerializeField] GameObject perfectParticle;
+
     [SerializeField] private TextMeshProUGUI keyText;
 
     // Start is called before the first frame update
@@ -35,29 +38,54 @@ public class CircleActivator : MonoBehaviour
             {
                 Debug.Log("too early");
                 gameManager.combo = 0;
+                gameManager.failCounter++;
             } else if(scalePercentage >= 0.6 && scalePercentage < 0.85)
             {
                 Debug.Log("good!");
                 gameManager.combo += 1;
+
+                if(gameManager.failCounter > 0)
+                {
+                    gameManager.failCounter = 0;
+                }
                
             } else if(scalePercentage >= 0.85 && scalePercentage <0.9)
             {
                 Debug.Log("Great!");
                 gameManager.combo += 1;
+
+                if (gameManager.failCounter > 0)
+                {
+                    gameManager.failCounter = 0;
+                }
+
             } else if(scalePercentage >= 0.9 && scalePercentage <= 1.05)
             {
                 gameManager.combo += 2;
-                Debug.Log("Perfect");
+                Instantiate(perfectParticle, gameObject.transform.position, Quaternion.identity);
+
+                if (gameManager.failCounter > 0)
+                {
+                    gameManager.failCounter = 0;
+                }
+
             } 
             else if (scalePercentage > 1.05)
             {
                 Debug.Log("Missed!");
                 gameManager.combo = 0;
+                gameManager.failCounter++;
             }
 
             circleIndicator.localScale = Vector3.zero;
             gameObject.SetActive(false);
             
+        }
+
+        if(Input.GetKeyDown(KeyCode.LeftShift) ||  Input.GetKeyDown(KeyCode.RightShift))
+        {
+            circleIndicator.localScale = Vector3.zero;
+            gameObject.SetActive(false);
         }
     }
 
