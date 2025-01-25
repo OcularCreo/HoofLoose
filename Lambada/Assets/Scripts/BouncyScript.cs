@@ -14,8 +14,10 @@ public class BouncyScript : MonoBehaviour
     //private bool isScaling = false;
     private Coroutine scaleCoroutine;
 
-    [SerializeField] bool onKey = false;
+    [SerializeField] bool onAnyKey = false;
     [SerializeField] bool onAlive = false;
+
+    [SerializeField] KeyCode[] keycode;
 
     void Start()
     {
@@ -31,14 +33,19 @@ public class BouncyScript : MonoBehaviour
 
     void Update()
     {
-        if (onKey && Input.anyKeyDown)
+        if (onAnyKey && Input.anyKeyDown)
         {
-            // Stop any ongoing scaling sequence and start the new one
-            if (scaleCoroutine != null)
+            Bounce();
+        }
+        else 
+        {
+            for (int i = 0; i < keycode.Length; i++) 
             {
-                StopCoroutine(scaleCoroutine);
+                if (Input.GetKeyDown(keycode[i])) 
+                {
+                    Bounce();
+                }
             }
-            scaleCoroutine = StartCoroutine(ScaleSequence());
         }
     }
 

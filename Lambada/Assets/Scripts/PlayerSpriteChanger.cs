@@ -9,6 +9,8 @@ public class PlayerSpriteChanger : MonoBehaviour
     SpriteRenderer spriteRenderer;
     int currentSprite = 0;
 
+    [SerializeField] KeyCode[] keycode;
+
 
     // Start is called before the first frame update
     void Start()
@@ -19,9 +21,17 @@ public class PlayerSpriteChanger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKeyDown && danceSprites != null) 
+        /*if (Input.anyKeyDown && danceSprites != null) 
         {
             NextSprite();
+        }*/
+
+        for (int i = 0; i < keycode.Length; i++) 
+        {
+            if (Input.GetKeyDown(keycode[i]))
+            {
+                NextSprite();
+            }
         }
     }
 

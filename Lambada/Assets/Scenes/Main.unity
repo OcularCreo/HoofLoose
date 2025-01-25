@@ -1867,8 +1867,9 @@ MonoBehaviour:
   lerpDurationX: 0.05
   lerpDurationY: 0.05
   delayBeforeX: 0.03
-  onKey: 1
+  onAnyKey: 0
   onAlive: 0
+  keycode: 1101000012010000140100001301000020000000
 --- !u!114 &1879967719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1886,6 +1887,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 30c10daf8174c4a4fb5dde09b5150597, type: 3}
   - {fileID: 21300000, guid: 997e7f0ae4db3204e930bee814b286ad, type: 3}
   - {fileID: 21300000, guid: c142e6ad7d4b44c4183ff374145d8065, type: 3}
+  keycode: 1101000012010000140100001301000020000000
 --- !u!212 &1879967720
 SpriteRenderer:
   m_ObjectHideFlags: 0
