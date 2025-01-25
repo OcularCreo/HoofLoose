@@ -33,6 +33,7 @@ Transform:
   m_Children:
   - {fileID: 1957789484624832094}
   - {fileID: 5078839259707829588}
+  - {fileID: 135363846207927219}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8029141439856650419
@@ -104,6 +105,10 @@ MonoBehaviour:
   growthSpeed: 0
   keyToPress: 115
   perfectParticle: {fileID: 6280913621831229176, guid: 3407d8d6f89a8b24da9c02be8322d919, type: 3}
+  greatParticle: {fileID: 6280913621831229176, guid: 7adb6333e74054849a15b64246a6d59e, type: 3}
+  goodParticle: {fileID: 6280913621831229176, guid: 0759b10898738c14b8a6f8b2ebfbda30, type: 3}
+  missedParticle: {fileID: 6280913621831229176, guid: e3f31acd66b0aa14c90c849937ca68e0, type: 3}
+  particleSpawnTrans: {fileID: 135363846207927219}
   keyText: {fileID: 597941728791575268}
 --- !u!1 &2782436196999728835
 GameObject:
@@ -341,6 +346,37 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &3987745823670646383
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 135363846207927219}
+  m_Layer: 0
+  m_Name: ParticleSpawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &135363846207927219
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3987745823670646383}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.575, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4598376305504589175}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5748327752576713561
 GameObject:
   m_ObjectHideFlags: 0
