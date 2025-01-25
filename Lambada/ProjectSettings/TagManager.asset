@@ -8,6 +8,7 @@ TagManager:
   - GrazePoint
   - Sheep
   - Note
+  - SheepManager
   layers:
   - Default
   - TransparentFX

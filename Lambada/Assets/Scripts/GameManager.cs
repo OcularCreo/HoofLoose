@@ -19,10 +19,17 @@ public class GameManager : MonoBehaviour
     private bool shiftDown;
     
     private float time = 0;
-    
+
+    [SerializeField] private SheepManager sheepManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        if (sheepManager == null) 
+        {
+            sheepManager = GameObject.FindGameObjectWithTag("SheepManager").GetComponent<SheepManager>();
+        }
+
         shiftDown = false;
 
         resetKeyList();
@@ -80,7 +87,7 @@ public class GameManager : MonoBehaviour
         }
 
         //when player hits the pose button
-        if(Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             
             int iterations = combo / 8; //check if their combo is high enough to gain sheep
@@ -98,11 +105,18 @@ public class GameManager : MonoBehaviour
             }
 
             lives += gainedLives;       //add the amount of lives they gained
+            if (sheepManager) 
+            {
+                sheepManager.SubmitCombo(gainedLives); //add sheep to represent lives
+            }
             combo = 0;                  //reset their combo to zero
         }
 
-        comboTxt.text = "Combo: " + combo.ToString();
-        sheepTxt.text = "Sheep: " + lives.ToString();
+        if (comboTxt && sheepTxt) 
+        {
+            comboTxt.text = "Combo: " + combo.ToString();
+            sheepTxt.text = "Sheep: " + lives.ToString();
+        }
     }
 
     IEnumerator activate(float waitTime)
