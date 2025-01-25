@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Audio
+  - GrazePoint
   layers:
   - Default
   - TransparentFX

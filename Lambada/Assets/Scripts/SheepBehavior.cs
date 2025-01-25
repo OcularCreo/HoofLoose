@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SheepFlockBehavior : MonoBehaviour
+public class SheepBehavior : MonoBehaviour
 {
     public float maxSpeed = 5f;
     public float maxForce = 1f;
@@ -20,7 +20,56 @@ public class SheepFlockBehavior : MonoBehaviour
 
     private Vector3 velocity; // Current velocity of the sheep
 
+    private enum SheepState
+    {
+        Graze,
+        Dance
+    }
+
+    private SheepState currentState = SheepState.Graze;
+    private GameObject[] grazePoints;
+    private GameObject currentGrazePoint;
+
+    public float moveSpeed = 3f;
+
+    private void Start()
+    {
+        if (player == null)    
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+    }
+
     void Update()
+    {
+        if (player)
+        {
+            switch (currentState)
+            {
+                case SheepState.Graze:
+                    GrazeUpdate();
+                    break;
+                case SheepState.Dance:
+                    DanceUpdate();
+                    break;
+            }
+
+            // Press 'N' to switch to Dance state
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+                if (currentState == SheepState.Graze)
+                {
+                    TransitionToDanceState();
+                }
+                else
+                {
+                    //TransitionToGrazeState();
+                }
+            }
+        }
+    }
+
+    private void Flock() 
     {
         // Update flockmates (other sheep in the flock)
         UpdateFlockmates();
@@ -46,7 +95,7 @@ public class SheepFlockBehavior : MonoBehaviour
     void UpdateFlockmates()
     {
         flockmates.Clear();
-        foreach (var sheep in FindObjectsOfType<SheepFlockBehavior>())
+        foreach (var sheep in FindObjectsOfType<SheepBehavior>())
         {
             if (sheep != this) // Avoid adding itself to the list
             {
@@ -134,5 +183,57 @@ public class SheepFlockBehavior : MonoBehaviour
         }
 
         return force;
+    }
+
+    private void GrazeUpdate()
+    {
+        if (currentGrazePoint != null && Vector3.Distance(transform.position, currentGrazePoint.transform.position) > 0.5f)
+        {
+            MoveToGrazePoint();
+        }
+        else if (currentGrazePoint == null) 
+        {
+            ChooseNewGrazePoint();
+            //Debug.Log("currentGrazePoint = null");
+        }
+    }
+
+    private void DanceUpdate()
+    {
+        Flock();
+    }
+
+    private void ChooseNewGrazePoint()
+    {
+        grazePoints = GameObject.FindGameObjectsWithTag("GrazePoint");
+
+        if (grazePoints.Length > 0)
+        {
+            // Pick a random graze point
+            currentGrazePoint = grazePoints[Random.Range(0, grazePoints.Length)];
+        }
+    }
+
+    private void MoveToGrazePoint()
+    {
+        if (currentGrazePoint != null)
+        {
+            Vector3 targetPosition = currentGrazePoint.transform.position;
+
+            // Move towards the target
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        }
+    }
+
+    private void TransitionToGrazeState()
+    {
+        currentState = SheepState.Graze;
+        ChooseNewGrazePoint();
+    }
+
+    private void TransitionToDanceState()
+    {
+        currentState = SheepState.Dance;
+        // You can add a transition animation or behavior here if needed.
     }
 }
