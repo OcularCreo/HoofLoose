@@ -62,7 +62,7 @@ public class SheepBehaviour : MonoBehaviour
             }
 
             // Press 'N' to switch to Dance state
-            if (Input.GetKeyDown(KeyCode.N))
+           /* if (Input.GetKeyDown(KeyCode.N))
             {
                 if (currentState == SheepState.Graze)
                 {
@@ -72,7 +72,7 @@ public class SheepBehaviour : MonoBehaviour
                 {
                     //TransitionToGrazeState();
                 }
-            }
+            }*/
         }
     }
 
