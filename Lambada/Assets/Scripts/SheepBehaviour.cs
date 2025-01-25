@@ -224,6 +224,11 @@ public class SheepBehaviour : MonoBehaviour
 
             // Reset the timer
             timer = 0f;
+
+            if (GetComponent<BouncyScript>()) 
+            {
+                GetComponent<BouncyScript>().Bounce();
+            }
         }
     }
 
