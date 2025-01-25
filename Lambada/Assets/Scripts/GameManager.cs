@@ -88,16 +88,22 @@ public class GameManager : MonoBehaviour
         {
             shiftDown = false;
             StartCoroutine(activate(0));
+            time = 0;
 
+        }
+
+        //while shift is being held down
+        if(shiftDown)
+        {
             float elapsedTime = Time.time - time;
-
-            if (elapsedTime >= 3)
+            
+            if(elapsedTime >= 3)
             {
-                lives--;
+                lives-=2;
+                sheepManager.KillSheep(2);
                 time = Time.time;
             }
 
-            time = 0;
         }
 
         //when player hits the pose button
