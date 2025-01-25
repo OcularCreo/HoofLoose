@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     private int numActivators;
 
     private List<GameObject> keyActivatorsList;
+
+    [SerializeField] private SheepManager sheepManager;
     
     // Start is called before the first frame update
     void Start()
@@ -69,6 +71,7 @@ public class GameManager : MonoBehaviour
             }
 
             lives = gainedLives;
+            sheepManager.GetComponent<SheepManager>().SubmitCombo(gainedLives);
             combo = 0; 
         }
     }

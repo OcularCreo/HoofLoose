@@ -12,7 +12,7 @@ public class SheepSpawner : MonoBehaviour
     [SerializeField] private float maxY = 4f;
 
     private string sheepTag = "Sheep"; // Tag to identify sheep
-    private int maxSheepCount = 15; // Maximum number of sheep allowed in the scene
+    private int maxSheepCount = 9; // Maximum number of sheep allowed in the scene
     private float spawnInterval = 5f; // Initial time interval for spawning sheep
     private float intervalDecrement = 0.1f; // How much the interval will decrease over time
     private float minInterval = 1f; // Minimum spawn interval

@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   destroyTime: 4
-  positionOffset: {x: 0.3, y: 0.3}
+  positionOffset: {x: 0.5, y: 2}
   target: {fileID: 0}
 --- !u!114 &5568393433240917580
 MonoBehaviour:

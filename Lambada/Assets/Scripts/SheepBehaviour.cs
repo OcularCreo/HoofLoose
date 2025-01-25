@@ -220,7 +220,7 @@ public class SheepBehaviour : MonoBehaviour
         if (timer >= rotationInterval)
         {
             // Rotate the object by 45 degrees around the Z-axis (2D rotation)
-            transform.Rotate(0, 0, 45);
+            //transform.Rotate(0, 0, 45);
 
             // Reset the timer
             timer = 0f;
