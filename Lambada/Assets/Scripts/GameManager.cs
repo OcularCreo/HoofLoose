@@ -157,10 +157,7 @@ public class GameManager : MonoBehaviour
 
     private void endGame()
     {
-        if(win)
-        {
-
-        }
+        
     }
 
     private void handleShiftInput()
