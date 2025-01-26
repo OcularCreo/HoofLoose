@@ -5,6 +5,7 @@ using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -52,6 +53,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI maxSheepTxt;
     [SerializeField] private TextMeshProUGUI currentSheepTxt;
     [SerializeField] private TextMeshProUGUI buttTxt;
+    [SerializeField] private TextMeshProUGUI winLoseTxt;
 
     // Start is called before the first frame update
     void Start()
@@ -93,6 +95,18 @@ public class GameManager : MonoBehaviour
         spaceKeyJustPressed = false;
         win = false;
         slider.maxValue = amountToTwerk;
+
+        scoreCanvas.SetActive(false);
+    }
+
+    public void PlayGame()
+    {
+        SceneManager.LoadSceneAsync("Main");
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadSceneAsync("MainMenu");
     }
 
     private void resetKeyList()
@@ -194,6 +208,14 @@ public class GameManager : MonoBehaviour
             maxSheepTxt.text = maxLives.ToString();
             currentSheepTxt.text = lives.ToString();
             buttTxt.text = (twerkCount / amountToTwerk).ToString();
+
+            if(win)
+            {
+                winLoseTxt.text = "Winner";
+            } else
+            {
+                winLoseTxt.text = "You Lost";
+            }
         }
 
     }
@@ -390,9 +412,12 @@ public class GameManager : MonoBehaviour
         }
 
         // if player reaches the amount of twerks to win
-        if(twerkCount >= 10) // i made it 10 for now for testing
+        if(twerkCount >= amountToTwerk) // i made it 10 for now for testing
         {
             win = true;
+            runGame = false;
+            showScore = true;
+            endGame();
         }
     }
 }
