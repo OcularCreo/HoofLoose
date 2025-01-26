@@ -13,6 +13,8 @@ public class WolfManager : MonoBehaviour
 
     [SerializeField] private GameObject wolfPrefab;
 
+    private Vector3 spawnPos = new Vector3(11f, 0f, 0f);
+
     void Update()
     {
         if (isTimerRunning)
@@ -42,7 +44,7 @@ public class WolfManager : MonoBehaviour
 
     public void SpawnWolf(int stealAmount) 
     {
-        GameObject wolf = Instantiate(wolfPrefab, transform.position, Quaternion.identity);
+        GameObject wolf = Instantiate(wolfPrefab, spawnPos, Quaternion.identity);
         wolf.GetComponent<Wolf>().sheepToSteal = stealAmount;
     }
 }

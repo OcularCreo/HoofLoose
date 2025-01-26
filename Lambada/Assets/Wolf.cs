@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,8 @@ public class Wolf : MonoBehaviour
     private bool hasSheep;
 
     private float speed = 3f;
+
+    private Vector3 escapePos = new Vector3(11f, 0f, 0f);
 
 
     private void Start()
@@ -64,6 +67,7 @@ public class Wolf : MonoBehaviour
             else 
             {
                 Debug.Log("No Target");
+                //Lose?
             }
         }
         else if (distFromTarget > distToGrab)
@@ -81,15 +85,24 @@ public class Wolf : MonoBehaviour
         //if wolf reahes sheep
         else if (distFromTarget < distToGrab) 
         {
-            AttemptEscape();
+            hasSheep = true;
         }
     }
 
     private void AttemptEscape() 
     {
-        
-        //walk off screen
-        //once off screen delete self
+        //remove sheep
+        sheepManager.KillSheep(sheepToSteal);
+
+        //run off screen
+        Vector2 direction = (escapePos - transform.position).normalized;
+
+        transform.position = Vector2.MoveTowards(transform.position, escapePos, speed * Time.deltaTime);
+
+        if (Vector3.Distance(transform.position, escapePos) < 0.5) 
+        {
+            Die();
+        }
     }
 
     private void CheckStare() 
@@ -115,7 +128,15 @@ public class Wolf : MonoBehaviour
     private void DropSheep()
     {
         //Spawn Sheep
-
+        if (hasSheep) 
+        {
+            sheepManager.SpawnSheep(sheepToSteal);
+            List<GameObject> sheepRespawned = sheepManager.GetAllStateSheep(SheepBehaviour.SheepState.Graze);
+            for (int i = 0; i < sheepToSteal; i++) 
+            {
+                sheepRespawned[i].GetComponent<SheepBehaviour>().TransitionToDanceState();
+            }
+        }
 
         Die();
     }
