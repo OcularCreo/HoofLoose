@@ -37,7 +37,7 @@ public class Wolf : MonoBehaviour
     private void Start()
     {
         gameObject.transform.rotation = Quaternion.Euler(transform.rotation.x, 180f, transform.rotation.z);
-        textCanvas.transform.rotation = Quaternion.Euler(textCanvas.transform.rotation.x, 180f, textCanvas.transform.rotation.z);
+        textCanvas.SetActive(false);
         if (!sheepManager) 
         {
             sheepManager = GameObject.FindGameObjectWithTag("SheepManager").GetComponent<SheepManager>();
@@ -92,8 +92,9 @@ public class Wolf : MonoBehaviour
             }
             else 
             {
-                Debug.Log("No Target");
+                //Debug.Log("No Target");
                 //Lose?
+                --gameManager.lives;
             }
         }
         else if (distFromTarget > distToGrab)
@@ -196,7 +197,8 @@ public class Wolf : MonoBehaviour
     {
         gameObject.GetComponent<BouncyScript>().Bounce();
         gameObject.transform.rotation = Quaternion.Euler(transform.rotation.x, 0f, transform.rotation.z);
-        textCanvas.transform.rotation = Quaternion.Euler(textCanvas.transform.rotation.x, 0f, textCanvas.transform.rotation.z);
+        textCanvas.SetActive(true);
+        textCanvas.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         //Vector3 newRot = gameObject.transform.rotation;
         //gameObject.transform.localScale = new Vector3(-1 * (newScale.x), newScale.y, newScale.z);
     }
