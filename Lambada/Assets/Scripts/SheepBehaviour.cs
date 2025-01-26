@@ -12,6 +12,9 @@ public class SheepBehaviour : MonoBehaviour
     private float timeSinceLastDirectionChange = 0f;
     private Vector2 currentDirection;
 
+    private Color danceColour = Color.white;
+    private Color grazeColour = new Color(183, 183, 183);
+
 
     //STATES
     public enum SheepState
@@ -140,11 +143,13 @@ public class SheepBehaviour : MonoBehaviour
     {
         currentState = SheepState.Graze;
         ChooseNewGrazePoint();
+        gameObject.GetComponent<SpriteRenderer>().color = grazeColour;
     }
 
     public void TransitionToDanceState()
     {
         currentState = SheepState.Dance;
+        gameObject.GetComponent<SpriteRenderer>().color = danceColour;
         // You can add a transition animation or behavior here if needed.
     }
 
