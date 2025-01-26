@@ -55,6 +55,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI buttTxt;
     [SerializeField] private TextMeshProUGUI winLoseTxt;
 
+    [SerializeField] private GameObject sheepButt;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -207,7 +209,7 @@ public class GameManager : MonoBehaviour
             maxComboTxt.text = maxCombo.ToString();
             maxSheepTxt.text = maxLives.ToString();
             currentSheepTxt.text = lives.ToString();
-            buttTxt.text = ((twerkCount / amountToTwerk) * 10).ToString() + "%";
+            buttTxt.text = ((twerkCount / amountToTwerk) * 100).ToString() + "%";
 
             if(win)
             {
@@ -407,6 +409,9 @@ public class GameManager : MonoBehaviour
             {
                 twerkCount += 1;
                 slider.value = twerkCount;
+
+               //sheepButt.GetComponent<Transform>().localScale = ;
+
                 //Debug.Log("twerked: " + twerkCount);
             }
         }
