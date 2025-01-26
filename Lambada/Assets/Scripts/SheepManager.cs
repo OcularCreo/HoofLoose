@@ -16,15 +16,42 @@ public class SheepManager : MonoBehaviour
     private WolfManager wolfManager;
     private bool wolfTimerStarted = false;
 
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
         wolfManager = GameObject.FindObjectOfType<WolfManager>();
+        gameManager = GameObject.FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (wolfManager == null) 
+        {
+            wolfManager = GameObject.FindObjectOfType<WolfManager>();
+        }
+
+        if (gameManager == null) 
+        {
+            gameManager = GameObject.FindObjectOfType<GameManager>();
+        }
+
+        int dancingSheep = GetNumberStateSheep(SheepBehaviour.SheepState.Dance);
+        if (gameManager.lives > dancingSheep) 
+        {
+            if (gameManager.lives < 50) 
+            {
+                SubmitCombo(gameManager.lives - dancingSheep);
+            }
+            
+        }
+        else if (gameManager.lives < dancingSheep)
+        {
+            KillSheep(dancingSheep - gameManager.lives);
+        }
+
         /*
         if (Input.GetKeyDown("l")) 
         {
@@ -114,7 +141,7 @@ public class SheepManager : MonoBehaviour
             else
             {
                 // Lose Game?
-                Debug.Log("You lose?");
+                //Debug.Log("You lose?");
             }
 
         }

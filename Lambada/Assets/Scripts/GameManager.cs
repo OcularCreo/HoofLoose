@@ -43,8 +43,20 @@ public class GameManager : MonoBehaviour
     private bool spaceKeyJustPressed;
     public bool win;
 
+    [SerializeField] private GameObject scoreCanvas;
+
+    [SerializeField] private TextMeshProUGUI maxComboTxt;
+    [SerializeField] private TextMeshProUGUI maxSheepTxt;
+    [SerializeField] private TextMeshProUGUI currentSheepTxt;
+    [SerializeField] private TextMeshProUGUI buttTxt;
+
     // Start is called before the first frame update
     void Start()
+    {
+        setupGame();
+    }
+
+    public void setupGame()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
 
@@ -62,7 +74,7 @@ public class GameManager : MonoBehaviour
         existingKeys = new KeyCode[keyActivators.Length];
 
         //get the key code of each activator
-        for(int i = 0; i < keyActivators.Length; i++)
+        for (int i = 0; i < keyActivators.Length; i++)
         {
             existingKeys[i] = keyActivators[i].GetComponent<CircleActivator>().getKeyCode();
         }
@@ -77,8 +89,7 @@ public class GameManager : MonoBehaviour
         twerkCount = 0;
         spaceKeyJustPressed = false;
         win = false;
-
-}
+    }
 
     private void resetKeyList()
     {
@@ -126,17 +137,19 @@ public class GameManager : MonoBehaviour
                 if (failCounter > 2)
                 {
                     lives--;
-                    if (lives < 0)
-                    {
-                        lives = 0;
-
-                        runGame = false;    //stop running the game
-                        showScore = true;   //set show score to true to be able to tell that the score is showing
-                        win = false;        //set win to false
-                    }
-
                     sheepManager.KillSheep(1);
                     failCounter = 0;
+                }
+
+                if (lives < 0)
+                {
+                    lives = 0;
+
+                    runGame = false;    //stop running the game
+                    showScore = true;   //set show score to true to be able to tell that the score is showing
+                    win = false;        //set win to false
+
+                    endGame();
                 }
 
                 handleShiftInput();
@@ -159,7 +172,26 @@ public class GameManager : MonoBehaviour
 
     private void endGame()
     {
-        
+        //make all activators inactive
+        for (int i = 0; i < keyActivators.Length; i++)
+        {
+            keyActivators[i].SetActive(false);
+        }
+
+        //stop all other actions in the game
+        StopAllCoroutines();
+
+        //show the score canvas
+        if (scoreCanvas)
+        {
+            scoreCanvas.SetActive(true);
+
+            maxComboTxt.text = maxCombo.ToString();
+            maxSheepTxt.text = maxLives.ToString();
+            currentSheepTxt.text = lives.ToString();
+            buttTxt.text = (twerkCount / amountToTwerk).ToString();
+        }
+
     }
 
     private void handleShiftInput()
