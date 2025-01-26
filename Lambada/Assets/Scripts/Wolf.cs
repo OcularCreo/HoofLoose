@@ -27,6 +27,8 @@ public class Wolf : MonoBehaviour
 
     private bool hasChangedDirection = false;
 
+    private GameManager gameManager;
+
 
     private void Start()
     {
@@ -35,9 +37,17 @@ public class Wolf : MonoBehaviour
         {
             sheepManager = GameObject.FindGameObjectWithTag("SheepManager").GetComponent<SheepManager>();
         }
+
+        gameManager = GameObject.FindObjectOfType<GameManager>();
     }
     void Update()
     {
+        if (gameManager == null)
+        {
+            gameManager = GameObject.FindObjectOfType<GameManager>();
+        }
+
+
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             isStareTimerRunning = true;
@@ -103,7 +113,7 @@ public class Wolf : MonoBehaviour
         if (!sheepRemoved) 
         {
             //remove sheep
-            sheepManager.KillSheep(sheepToSteal);
+            gameManager.lives = gameManager.lives - sheepToSteal;
             sheepRemoved = true;
         }
 
@@ -138,10 +148,10 @@ public class Wolf : MonoBehaviour
             // If the timer reaches 0, stop steal
             if (stareTimeRemaining <= 0f)
             {
-                DropSheep();
-
                 stareTimeRemaining = stareTimer; // Restart the timer
                 isStareTimerRunning = false;
+                DropSheep();
+
             }
         }
     }
@@ -151,11 +161,19 @@ public class Wolf : MonoBehaviour
         //Spawn Sheep
         if (hasSheep) 
         {
-            sheepManager.SpawnSheep(sheepToSteal);
-            List<GameObject> sheepRespawned = sheepManager.GetAllStateSheep(SheepBehaviour.SheepState.Graze);
-            for (int i = 0; i < sheepToSteal; i++) 
+            if (gameManager.lives + sheepToSteal > 50)
             {
-                sheepRespawned[i].GetComponent<SheepBehaviour>().TransitionToDanceState();
+                int sheepToSpawn = 50 - gameManager.lives;
+                if (sheepToSpawn < 0) 
+                {
+                    sheepToSpawn = 0;
+                }
+
+                sheepManager.SubmitCombo(sheepToSpawn);
+            }
+            else 
+            {
+                sheepManager.SubmitCombo(sheepToSteal);
             }
         }
 
