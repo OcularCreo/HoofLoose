@@ -207,7 +207,7 @@ public class GameManager : MonoBehaviour
             maxComboTxt.text = maxCombo.ToString();
             maxSheepTxt.text = maxLives.ToString();
             currentSheepTxt.text = lives.ToString();
-            buttTxt.text = (twerkCount / amountToTwerk).ToString();
+            buttTxt.text = ((twerkCount / amountToTwerk) * 10).ToString() + "%";
 
             if(win)
             {
