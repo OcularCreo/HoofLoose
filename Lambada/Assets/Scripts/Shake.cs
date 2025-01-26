@@ -21,9 +21,9 @@ public class Shake : MonoBehaviour
     {
         int sequenceIdx = gameManager.combo / 8;
         
-        if(sequenceIdx > 1)
+        if(sequenceIdx > 0)
         {
-            transform.position = starPos + (Random.insideUnitSphere * Mathf.Clamp(1.25f * sequenceIdx, 1.25f, 3f));
+            transform.position = starPos + (Random.insideUnitSphere * Mathf.Clamp(1.25f * sequenceIdx, 1.25f, 5f));
         } else
         {
             transform.position = starPos;
