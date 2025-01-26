@@ -31,6 +31,10 @@ public class WolfManager : MonoBehaviour
                 //Debug.Log("Timer restarted");
 
                 sheepToSteal = sheepToSteal * 2;
+                if (sheepToSteal > 500)
+                {
+                    sheepToSteal = 500;
+                }
                 //Debug.Log("Next Steal: " + sheepToSteal);
             }
         }
