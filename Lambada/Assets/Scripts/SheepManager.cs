@@ -172,4 +172,24 @@ public class SheepManager : MonoBehaviour
             return null;
         }
     }
+
+    public int GetNumberStateSheep(SheepBehaviour.SheepState state)
+    {
+        // Find all sheep with the "Sheep" tag
+        sheepList = GameObject.FindGameObjectsWithTag("Sheep");
+
+        // Create a list of sheep that are in the "Dance" state
+        var stateList = new System.Collections.Generic.List<GameObject>();
+
+        foreach (var sheep in sheepList)
+        {
+            SheepBehaviour.SheepState sheepState = sheep.GetComponent<SheepBehaviour>().GetState();
+            if (sheepState == state)
+            {
+                stateList.Add(sheep);
+            }
+        }
+
+        return stateList.Count;
+    }
 }
