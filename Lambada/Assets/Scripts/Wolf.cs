@@ -39,7 +39,7 @@ public class Wolf : MonoBehaviour
         {
             isStareTimerRunning = true;
         }
-        else 
+		else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             isStareTimerRunning = false;
         }

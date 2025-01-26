@@ -2126,7 +2126,17 @@ MonoBehaviour:
   musicSource: {fileID: 65485485}
   SFXSource: {fileID: 340599451}
   backgroundMusic: {fileID: 8300000, guid: 90c76149a497aee46a5ae2dfd8492ece, type: 3}
-  poseSound: {fileID: 0}
+  poseSound1: {fileID: 8300000, guid: 5937aaa0137e838429f6bbe0ee98eb64, type: 3}
+  poseSound2: {fileID: 8300000, guid: 580b023065362a94bbe544db2b5a8ce6, type: 3}
+  poseSound3: {fileID: 8300000, guid: de42cf70d331ac74695248a77ac1907c, type: 3}
+  poseSound4: {fileID: 8300000, guid: d1db0410d4c6e714096d9b419acdf399, type: 3}
+  twerk: {fileID: 8300000, guid: b1c3f8586c2e26c4587b1353d9f73f6b, type: 3}
+  wtf: {fileID: 8300000, guid: c86181ffa5adf054b826e6e170f1409b, type: 3}
+  select: {fileID: 8300000, guid: cada6e0caa6a437419b7c4ca9f936e88, type: 3}
+  perfect: {fileID: 8300000, guid: d4479560e9332154d91fd31db04213fd, type: 3}
+  great: {fileID: 8300000, guid: 3f29b4e5e70808a4fbdadf297c6c6697, type: 3}
+  good: {fileID: 8300000, guid: ebf8f755e870a93479e64a6406f04361, type: 3}
+  miss: {fileID: 8300000, guid: 5370599a3cefc9e4ba69071e793c2d18, type: 3}
 --- !u!4 &879638446
 Transform:
   m_ObjectHideFlags: 0
@@ -3896,6 +3906,7 @@ MonoBehaviour:
   sheepTxt: {fileID: 763256425}
   sheepManager: {fileID: 1015375641}
   poseParticle: {fileID: 428663240816499472, guid: 2b576b860c1160c4aa8f1cc86a985c3f, type: 3}
+  audioManager: {fileID: 0}
 --- !u!4 &2095762388
 Transform:
   m_ObjectHideFlags: 0

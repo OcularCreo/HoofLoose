@@ -10,9 +10,19 @@ public class AudioManager : MonoBehaviour
 
     [Header("--- Audio Clip ---")]
     public AudioClip backgroundMusic;
-    public AudioClip poseSound;
+    public AudioClip poseSound1;
+	public AudioClip poseSound2;
+	public AudioClip poseSound3;
+	public AudioClip poseSound4;
+	public AudioClip twerk;
+	public AudioClip wtf;
+	public AudioClip select;
+	public AudioClip perfect;
+	public AudioClip great;
+	public AudioClip good;
+	public AudioClip miss;
 
-    private void Start()
+	private void Start()
     {
         musicSource.clip = backgroundMusic;
         musicSource.Play();
@@ -22,4 +32,10 @@ public class AudioManager : MonoBehaviour
     { 
         SFXSource.PlayOneShot(clip);
     }
+
+	public void PlaySong(AudioClip clip)
+	{
+		musicSource.clip = clip;
+		musicSource.Play();
+	}
 }
