@@ -79,18 +79,18 @@ public class GameManager : MonoBehaviour
             failCounter = 0;
         }
 
+        //staring mechanic controls
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
         {
-            shiftDown = true;
-            StopAllCoroutines();
-            time = Time.time;
+            shiftDown = true;       //set shift down to true
+            StopAllCoroutines();    //stop all coroutines
+            time = Time.time;       //log the first time
 
         } else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
         {
             shiftDown = false;
             StartCoroutine(activate(0));
             time = 0;
-
         }
 
         //while shift is being held down
@@ -131,19 +131,31 @@ public class GameManager : MonoBehaviour
                 next = gainedLives;
             }
 
-            lives += gainedLives;       //add the amount of lives they gained
+            //add the amount of lives they gained
+            lives += gainedLives;
+
+            //ensure the sheep manager and player exist
             if (sheepManager && player)
             {
-                sheepManager.SubmitCombo(gainedLives); //add sheep to represent lives
-                PoseParticle();
+                //cap spawning 55 sheep
+                if(lives < 55)
+                {
+                    sheepManager.SubmitCombo(gainedLives); //add sheep to represent lives
+                } 
+
+                PoseParticle();                            //instantiate the pose particles
             }
-            combo = 0;                  //reset their combo to zero
+
+            combo = 0; //reset their combo to zero
+            StopAllCoroutines();
+            StartCoroutine(activate(1f));
         }
 
+        //make sure that the combo text and sheep text exist
         if (comboTxt && sheepTxt)
         {
-            comboTxt.text = combo.ToString();
-            sheepTxt.text = "Sheep: " + lives.ToString();
+            comboTxt.text = combo.ToString();               //update the combo text string
+            sheepTxt.text = "Sheep: " + lives.ToString();   //update the sheep text string
         }
     }
 
@@ -160,18 +172,15 @@ public class GameManager : MonoBehaviour
             // 40% chance of double key press
             if (Random.value <= 0.3)
             {
-                StartCoroutine(activateSecondary(0f));
+                activateKey();
             }
 
-            StartCoroutine(activate(1.25f));
+            float activateTime = 1.1f - ((combo / 8) * 0.15f);
+            activateTime = Mathf.Clamp(activateTime, 0.7f, 1.1f);
+
+            StartCoroutine(activate(activateTime));
         }
 
-    }
-
-    IEnumerator activateSecondary(float waitTime)
-    {
-        yield return new WaitForSecondsRealtime(waitTime);
-        activateKey();
     }
 
     private void activateKey()

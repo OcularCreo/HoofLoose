@@ -19,6 +19,7 @@ public class Wolf : MonoBehaviour
     private float distToGrab = 1f;
 
     private bool hasSheep;
+    private bool sheepRemoved = false;
 
     private float speed = 3f;
 
@@ -34,13 +35,18 @@ public class Wolf : MonoBehaviour
     }
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            isStareTimerRunning = true;
+        }
+        else 
+        {
+            isStareTimerRunning = false;
+        }
+
         CheckStare();
 
-        if (isStareTimerRunning) 
-        {
-            //Do nothing
-        }
-        else
+        if (!isStareTimerRunning) 
         {
             if (hasSheep)
             {
@@ -91,8 +97,12 @@ public class Wolf : MonoBehaviour
 
     private void AttemptEscape() 
     {
-        //remove sheep
-        sheepManager.KillSheep(sheepToSteal);
+        if (!sheepRemoved) 
+        {
+            //remove sheep
+            sheepManager.KillSheep(sheepToSteal);
+            sheepRemoved = true;
+        }
 
         //run off screen
         Vector2 direction = (escapePos - transform.position).normalized;

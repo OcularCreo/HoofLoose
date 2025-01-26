@@ -9,13 +9,15 @@ public class GrowingCircle : MonoBehaviour
 
     public bool grow;
     
-    [SerializeField] private float growSpeed;
     [SerializeField] private float maxScale;
-    
+    [SerializeField] private float initialGrowSpeed;
+    private float curGrowSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
         grow = true;
+        curGrowSpeed = initialGrowSpeed;
         transform.localScale = Vector3.zero;
     }
 
@@ -26,7 +28,11 @@ public class GrowingCircle : MonoBehaviour
         {
             if(transform.localScale.x < maxScale)
             {
-                transform.localScale += Vector3.one * growSpeed * Time.deltaTime;
+                curGrowSpeed = initialGrowSpeed + (0.15f * (gameManager.combo / 4));
+
+                curGrowSpeed = Mathf.Clamp(curGrowSpeed, 0.1f, 1.85f);
+
+                transform.localScale += Vector3.one * curGrowSpeed * Time.deltaTime;
             } else
             {
                 transform.localScale = Vector3.zero;
