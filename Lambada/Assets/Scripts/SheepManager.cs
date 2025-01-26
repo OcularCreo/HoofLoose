@@ -139,4 +139,37 @@ public class SheepManager : MonoBehaviour
 
         //Debug.Log("Attempted to kill " + sheepToKill + " sheep");
     }
+
+    public GameObject GetRandomStateSheep(SheepBehaviour.SheepState state) 
+    {
+        GameObject theChosenOne;
+
+        // Find all sheep with the "Sheep" tag
+        sheepList = GameObject.FindGameObjectsWithTag("Sheep");
+
+        // Create a list of sheep that are in the "Dance" state
+        var stateList = new System.Collections.Generic.List<GameObject>();
+
+        foreach (var sheep in sheepList)
+        {
+            SheepBehaviour.SheepState sheepState = sheep.GetComponent<SheepBehaviour>().GetState();
+            if (sheepState == state)
+            {
+                stateList.Add(sheep);
+            }
+        }
+
+        if (stateList.Count > 0) 
+        {
+            int randomSheep = Random.Range(0, stateList.Count);
+
+            theChosenOne = stateList[randomSheep];
+
+            return theChosenOne;
+        }
+        else 
+        {
+            return null;
+        }
+    }
 }
