@@ -18,8 +18,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI sheepTxt;
     [SerializeField] private GameObject countDownTxt;
     [SerializeField] private float countDownTimer;
+    
     private bool runGame;
-   
+    private bool showScore;
+
     private List<GameObject> keyActivatorsList;
     private bool shiftDown;
 
@@ -107,13 +109,15 @@ public class GameManager : MonoBehaviour
         {
             
             //if timer text is active at this point, make it inactive
-            if(runGame == false)
+            if(runGame == false && showScore == false)
             {
                 countDownTxt.SetActive(false);
                 resetKeyList();
                 StartCoroutine(activate(0));
                 runGame = true;
-            } else
+            } 
+            //if the game hasn't ended
+            else if(!showScore)
             {
                 if (failCounter > 2)
                 {
@@ -121,6 +125,10 @@ public class GameManager : MonoBehaviour
                     if (lives < 0)
                     {
                         lives = 0;
+
+                        runGame = false;    //stop running the game
+                        showScore = true;   //set show score to true to be able to tell that the score is showing
+                        win = false;        //set win to false
                     }
 
                     sheepManager.KillSheep(1);
@@ -145,6 +153,11 @@ public class GameManager : MonoBehaviour
             sheepTxt.text = "Sheep: " + lives.ToString();   //update the sheep text string
         }
 
+    }
+
+    private void endGame()
+    {
+        
     }
 
     private void handleShiftInput()
