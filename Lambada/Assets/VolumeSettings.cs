@@ -23,10 +23,23 @@ public class VolumeSettings : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (musicSlider.value != PlayerPrefs.GetFloat("musicVolume")) 
+        {
+            musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
+        }
+
+        if (sfxSlider.value != PlayerPrefs.GetFloat("sfxVolume"))
+        {
+            sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume");
+        }
+    }
+
     public void SetMusicVolume() 
     {
         float volume = musicSlider.value;
-        mixer.SetFloat("music", Mathf.Log10(volume)*20);
+        mixer.SetFloat("music", Mathf.Log10(volume) *20);
         PlayerPrefs.SetFloat("musicVolume", volume);
     }
 
