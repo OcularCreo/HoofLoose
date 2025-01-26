@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
         {
             shiftDown = true;
-            StopCoroutine("activate");
+            StopAllCoroutines();
             time = Time.time;
 
         } else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
@@ -160,7 +160,7 @@ public class GameManager : MonoBehaviour
             // 40% chance of double key press
             if (Random.value <= 0.3)
             {
-                StartCoroutine(activateSecondary(0.25f));
+                StartCoroutine(activateSecondary(0f));
             }
 
             StartCoroutine(activate(1.25f));

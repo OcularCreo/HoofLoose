@@ -483,7 +483,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2564439534263323173, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4598376305504589175, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
       propertyPath: m_LocalPosition.x
@@ -787,6 +787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sheepPrefab: {fileID: 5762891991001760034, guid: a6a754e659e8e6b4882fc83b7d13a136, type: 3}
+  sheepManager: {fileID: 0}
   minX: -12.9
   maxX: -9.42
   minY: -5
@@ -1116,7 +1117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2564439534263323173, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4598376305504589175, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1285,7 +1286,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2564439534263323173, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4598376305504589175, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1372,7 +1373,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2564439534263323173, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4598376305504589175, guid: 891ad4ee2def79d4da3b985c828a8928, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3038,7 +3039,7 @@ MonoBehaviour:
   m_text: '#'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3338,7 +3339,7 @@ MonoBehaviour:
   m_text: COMBO
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3492,11 +3493,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   danceSprites:
-  - {fileID: 21300000, guid: 6cf4835fda3b9f14298cf989660dabd7, type: 3}
-  - {fileID: 21300000, guid: 30c10daf8174c4a4fb5dde09b5150597, type: 3}
-  - {fileID: 21300000, guid: 997e7f0ae4db3204e930bee814b286ad, type: 3}
-  - {fileID: 21300000, guid: c142e6ad7d4b44c4183ff374145d8065, type: 3}
-  keycode: 1101000012010000140100001301000020000000
+  - {fileID: 21300000, guid: 6ad378491b0d7694093e5787b4181534, type: 3}
+  - {fileID: 21300000, guid: b788629efffa1a247b7ba243e530ca86, type: 3}
+  - {fileID: 21300000, guid: afa0d46ef5a805c4b8d8b90e4a767806, type: 3}
+  - {fileID: 21300000, guid: 0382302b29c57864886e8e09162bd59a, type: 3}
+  - {fileID: 21300000, guid: 246c3a330ce54cd40b1ab2151a2cadd5, type: 3}
+  - {fileID: 21300000, guid: 6898f165016ef5f43add0f16c32ba141, type: 3}
+  - {fileID: 21300000, guid: b6bf14cc25be5da4f99d502a2d44c257, type: 3}
+  keycode: 110100001201000014010000130100002000000030010000
 --- !u!212 &1879967720
 SpriteRenderer:
   m_ObjectHideFlags: 0
