@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public int failCounter;
     public int lives;
 
+    public int maxCombo;
+    private int maxLives;
+
     [SerializeField] private GameObject[] keyActivators;
     public KeyCode[] existingKeys;
 
@@ -36,6 +39,7 @@ public class GameManager : MonoBehaviour
 
     // bubble butt stuff
     private int twerkCount;
+    [SerializeField] private float amountToTwerk;
     private bool spaceKeyJustPressed;
     public bool win;
 
@@ -141,8 +145,6 @@ public class GameManager : MonoBehaviour
                 checkComboSubmit();
                 
             }
-
-            
             
         }
 
@@ -273,6 +275,12 @@ public class GameManager : MonoBehaviour
 
                 // bubble butt
                 spaceKeyJustPressed = true;
+
+                //check if max sheep has been beaten 
+                if(maxLives < lives)
+                {
+                    maxLives = lives;
+                }
 
                 combo = 0; //reset their combo to zero
                 StopAllCoroutines();

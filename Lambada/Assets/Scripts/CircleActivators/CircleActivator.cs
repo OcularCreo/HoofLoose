@@ -126,6 +126,12 @@ public class CircleActivator : MonoBehaviour
             if(success)
             {
                 gameManager.failCounter = 0;    //reset the fail counter
+
+                //check if the max combo was reached
+                if(gameManager.maxCombo < gameManager.combo)
+                {
+                    gameManager.maxCombo = gameManager.combo;
+                }
             } 
             //if the player was not succesful
             else
