@@ -14,7 +14,7 @@ public class Shake : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        starPos = transform.position;     
+        starPos = transform.localPosition;     
     }
 
     // Update is called once per frame
@@ -24,10 +24,10 @@ public class Shake : MonoBehaviour
         
         if(sequenceIdx > 0)
         {
-            transform.position = starPos + (Random.insideUnitSphere * Mathf.Clamp(shakeSpeed * sequenceIdx, shakeSpeed, 5f));
+            transform.localPosition = starPos + (Random.insideUnitSphere * Mathf.Clamp(shakeSpeed * sequenceIdx, shakeSpeed, 5f));
         } else
         {
-            transform.position = starPos;
+            transform.localPosition = starPos;
         }
     }
 
