@@ -76,6 +76,7 @@ public class CircleActivator : MonoBehaviour
             {
                 gameManager.failCounter++;
                 gameManager.combo = 0;
+                StopAllCoroutines();
             }
 
             circleIndicator.localScale = Vector3.zero;

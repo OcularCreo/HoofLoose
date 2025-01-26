@@ -75,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1149785111
-  m_SortingLayer: 5
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   circleIndicator: {fileID: 5078839259707829588}
-  growthSpeed: 0
+  growthSpeed: 1
   keyToPress: 115
   perfectParticle: {fileID: 6280913621831229176, guid: 3407d8d6f89a8b24da9c02be8322d919, type: 3}
   greatParticle: {fileID: 6280913621831229176, guid: 7adb6333e74054849a15b64246a6d59e, type: 3}
@@ -210,8 +210,8 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   activator: {fileID: 2564439534263323173}
   grow: 0
-  growSpeed: 1
   maxScale: 1.25
+  initialGrowSpeed: 1
 --- !u!1 &2795282017328132492
 GameObject:
   m_ObjectHideFlags: 0
