@@ -87,6 +87,7 @@ public class Wolf : MonoBehaviour
 
     private void AttemptEscape() 
     {
+        
         //walk off screen
         //once off screen delete self
     }

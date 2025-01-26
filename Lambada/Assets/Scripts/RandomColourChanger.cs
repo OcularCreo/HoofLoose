@@ -32,10 +32,10 @@ public class RandomColorChanger : MonoBehaviour
     private void ChangeColor()
     {
         // Generate a random hue value (between 0 and 1)
-        float hue = Random.Range(0.8f, 1f);
+        float hue = Random.Range(0f, 1f);
 
         // Convert hue to RGB and apply it to the sprite renderer
-        Color randomColor = Color.HSVToRGB(hue, 0.3f, 1f);
+        Color randomColor = Color.HSVToRGB(hue, 0.6f, 1f);
         spriteRenderer.color = randomColor;
     }
 }
