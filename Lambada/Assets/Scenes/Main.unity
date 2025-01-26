@@ -5513,6 +5513,7 @@ MonoBehaviour:
   currentSheepTxt: {fileID: 97990546}
   buttTxt: {fileID: 1395298973}
   winLoseTxt: {fileID: 262817945}
+  sheepButt: {fileID: 0}
 --- !u!4 &2095762388
 Transform:
   m_ObjectHideFlags: 0

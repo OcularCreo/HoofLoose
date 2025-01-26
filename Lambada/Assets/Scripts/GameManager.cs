@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI buttTxt;
     [SerializeField] private TextMeshProUGUI winLoseTxt;
 
-    [SerializeField] private GameObject sheepButt;
+    [SerializeField] private Transform sheepButt;
 
     // Start is called before the first frame update
     void Start()
@@ -343,8 +343,8 @@ public class GameManager : MonoBehaviour
                 }
 
                 combo = 0; //reset their combo to zero
-                StopAllCoroutines();
-                StartCoroutine(activate(1f));
+                //StopAllCoroutines();
+                //StartCoroutine(activate(1f));
             }
             else
             {
@@ -410,7 +410,7 @@ public class GameManager : MonoBehaviour
                 twerkCount += 1;
                 slider.value = twerkCount;
 
-               //sheepButt.GetComponent<Transform>().localScale = ;
+               //sheepButt.transform.localScale.x = (float)(twerkCount / amountToTwerk) * 0.5f;
 
                 //Debug.Log("twerked: " + twerkCount);
             }
