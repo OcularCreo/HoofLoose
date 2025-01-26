@@ -30,6 +30,10 @@ public class PlayerSpriteChanger : MonoBehaviour
             }
         }
 
+        if(Input.GetKeyUp(keycode[keycode.Length - 1])) {
+            spriteRenderer.sprite = danceSprites[danceSprites.Length - 1];
+        }
+
     }
 
     void NextSprite() 
