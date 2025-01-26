@@ -20,6 +20,8 @@ public class CircleActivator : MonoBehaviour
     [SerializeField] Transform particleSpawnTrans;
 
     [SerializeField] private TextMeshProUGUI keyText;
+    [SerializeField] private Sprite[] keyIndicatorSprites;
+    [SerializeField] private SpriteRenderer keyIndicator;
 
 	AudioManager audioManager;
 
@@ -27,9 +29,55 @@ public class CircleActivator : MonoBehaviour
 	void Start()
     {
         circleIndicator.GetComponent<Transform>().localScale = Vector3.zero;
-        keyText.text = keyToPress.ToString();
 		audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+
+        matchSprite();
 	}
+
+    private void matchSprite()
+    {
+        //if there are sprite indicators and a keyIndicator sprite renderer
+        if(keyIndicatorSprites.Length > 3 && keyIndicator) {
+
+            //match set the set the sprite renderer to the matching indicator sprite
+            if (keyToPress == KeyCode.LeftArrow)
+            {
+                keyIndicator.sprite = keyIndicatorSprites[0];
+                keyText.enabled = false;
+            }
+            else if (keyToPress == KeyCode.RightArrow)
+            {
+                keyIndicator.sprite = keyIndicatorSprites[1];
+                keyText.enabled = false;
+            }
+            else if (keyToPress == KeyCode.UpArrow)
+            {
+                keyIndicator.sprite = keyIndicatorSprites[2];
+                keyText.enabled = false;
+            }
+            else if (keyToPress == KeyCode.DownArrow)
+            {
+                keyIndicator.sprite = keyIndicatorSprites[3];
+                keyText.enabled = false;
+            }
+            //if the key to press for the object is not an arrow key then just edit the text gui
+            else
+            {
+                keyText.text = keyToPress.ToString();
+                keyIndicator.enabled = false;
+            }
+
+        } 
+        //if there is no renderer or all the sprites aren't there then just write th eky to press as a string
+        else
+        {
+
+            Debug.Log("Not enough or no renderer");
+            keyText.text = keyToPress.ToString();
+            keyIndicator.enabled = false;
+        }
+        
+    }
 
     // Update is called once per frame
     void Update()
