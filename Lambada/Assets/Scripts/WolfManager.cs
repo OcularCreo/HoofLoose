@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class WolfManager : MonoBehaviour
 {
     // Timer duration
-    private float totalTime = 25f; // Time before wolf comes
-    private float timeRemaining = 25f;
+    private float totalTime = 10f; // Time before wolf comes
+    private float timeRemaining = 10f;
     private bool isTimerRunning = false;
 
     private int sheepToSteal = 1;
