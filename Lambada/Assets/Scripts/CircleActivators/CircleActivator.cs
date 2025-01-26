@@ -82,8 +82,6 @@ public class CircleActivator : MonoBehaviour
             //if the player was not succesful
             else
             {
-                gameManager.failCounter++;
-                gameManager.combo = 0;
                 StopAllCoroutines();
             }
 
@@ -102,7 +100,14 @@ public class CircleActivator : MonoBehaviour
     public void missed()
     {
         gameManager.failCounter++;
+        gameManager.combo = 0;
         Instantiate(missedParticle, particleSpawnTrans.position, Quaternion.identity);
+    }
+
+    //returns the keycode of the activator
+    public KeyCode getKeyCode()
+    {
+        return keyToPress;
     }
 
 }

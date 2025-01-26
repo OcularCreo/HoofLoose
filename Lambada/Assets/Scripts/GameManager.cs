@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public int lives;
 
     [SerializeField] private GameObject[] keyActivators;
+    public KeyCode[] existingKeys;
 
     [SerializeField] private TextMeshProUGUI comboTxt;
     [SerializeField] private TextMeshProUGUI sheepTxt;
@@ -43,10 +44,18 @@ public class GameManager : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player");
         }
 
+        //create an index for each key activator
+        existingKeys = new KeyCode[keyActivators.Length];
+
+        //get the key code of each activator
+        for(int i = 0; i < keyActivators.Length; i++)
+        {
+            existingKeys[i] = keyActivators[i].GetComponent<CircleActivator>().getKeyCode();
+        }
+
         shiftDown = false;
 
         resetKeyList();
-
         StartCoroutine(activate(0));
 
     }
@@ -166,6 +175,35 @@ public class GameManager : MonoBehaviour
             comboTxt.text = combo.ToString();               //update the combo text string
             sheepTxt.text = "Sheep: " + lives.ToString();   //update the sheep text string
         }
+
+        //bool helps keep track of if the player has hit the wrong key
+        bool wrongKey = false;
+
+        //check if all they pressed a keycode corisponding to an activator that isn't active
+        for(int i = 0; i < existingKeys.Length; i++)
+        {
+            //first time they have hit a key for an inactive activator, break the loop and set wrong key to false
+            if (Input.GetKeyDown(existingKeys[i]) && !keyActivators[i].activeSelf)
+            {
+                wrongKey = true;
+                break;
+            }
+        }
+
+        //if they hit the wrong key find all active activators and call their missed function and set them to inactive
+        if (wrongKey)
+        {
+            for (int i = 0; i < existingKeys.Length; i++)
+            {
+                if (keyActivators[i].activeSelf)
+                {
+                    keyActivators[i].GetComponent<CircleActivator>().missed();
+                    keyActivators[i].SetActive(false);
+                    keyActivators[i].GetComponent<Transform>().localScale = Vector3.zero;
+                }
+            }
+        }
+        
     }
 
     IEnumerator activate(float waitTime)
@@ -205,5 +243,11 @@ public class GameManager : MonoBehaviour
         {
             Instantiate(poseParticle, player.transform.position, Quaternion.identity);
         }
+    }
+
+    //get function for the activators
+    public GameObject[] getActivators()
+    {
+        return keyActivators;
     }
 }
