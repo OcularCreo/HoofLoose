@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class Shake : MonoBehaviour
 {
-    [SerializeField] GameManager gameManager;
-    [SerializeField] bool shake;
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private bool alwaysShake;
+    [SerializeField] private float shakeSpeed = 1.25f;
 
     private Vector3 starPos;
 
@@ -19,25 +20,15 @@ public class Shake : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int sequenceIdx = gameManager.combo / 8;
+        int sequenceIdx = alwaysShake ? 1 : gameManager.combo / 8;
         
         if(sequenceIdx > 0)
         {
-            transform.position = starPos + (Random.insideUnitSphere * Mathf.Clamp(1.25f * sequenceIdx, 1.25f, 5f));
+            transform.position = starPos + (Random.insideUnitSphere * Mathf.Clamp(shakeSpeed * sequenceIdx, shakeSpeed, 5f));
         } else
         {
             transform.position = starPos;
         }
     }
 
-    public void startShake()
-    {
-        shake = true;
-    }
-
-    public void stopShake()
-    {
-        shake = false; 
-        transform.position = starPos;
-    }
 }

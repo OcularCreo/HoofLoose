@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI comboTxt;
     [SerializeField] private TextMeshProUGUI sheepTxt;
+    [SerializeField] private GameObject countDownTxt;
+    [SerializeField] private float countDownTimer;
+    private bool runGame;
    
     private List<GameObject> keyActivatorsList;
     private bool shiftDown;
@@ -54,9 +57,10 @@ public class GameManager : MonoBehaviour
         }
 
         shiftDown = false;
+        runGame = false;
 
-        resetKeyList();
-        StartCoroutine(activate(0));
+        comboTxt.text = "";
+        sheepTxt.text = "";
 
     }
 
@@ -80,19 +84,60 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (failCounter > 2)
+
+        //if the count down timer is above 0
+        if(countDownTimer >= 0)
         {
-            lives--;
-            if (lives < 0) 
+            countDownTxt.GetComponent<TextMeshProUGUI>().text = ((int)countDownTimer).ToString();   //display the time in whole numbers
+            countDownTimer -= Time.deltaTime;                                                       //track the change in time
+
+        } 
+        //star the game if the timer is below or equal to zero
+        else
+        {
+            
+            //if timer text is active at this point, make it inactive
+            if(runGame == false)
             {
-                lives = 0;
+                countDownTxt.SetActive(false);
+                resetKeyList();
+                StartCoroutine(activate(0));
+                runGame = true;
+            } else
+            {
+                if (failCounter > 2)
+                {
+                    lives--;
+                    if (lives < 0)
+                    {
+                        lives = 0;
+                    }
+
+                    sheepManager.KillSheep(1);
+                    failCounter = 0;
+                }
+
+                handleShiftInput();
+                checkWrongKeyPress();
+                checkComboSubmit();
             }
 
-            sheepManager.KillSheep(1);
-            failCounter = 0;
+            
+            
         }
 
-        //staring mechanic controls
+        //make sure that the combo text and sheep text exist
+        if (comboTxt && sheepTxt && runGame)
+        {
+            comboTxt.text = combo.ToString();               //update the combo text string
+            sheepTxt.text = "Sheep: " + lives.ToString();   //update the sheep text string
+        }
+
+    }
+
+    private void handleShiftInput()
+    {
+        //staring stare controles
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
         {
             audioManager.PlaySong(audioManager.wtf);
@@ -101,7 +146,8 @@ public class GameManager : MonoBehaviour
             StopAllCoroutines();    //stop all coroutines
             time = Time.time;       //log the first time
 
-        } else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
         {
             audioManager.PlaySong(audioManager.backgroundMusic);
 
@@ -111,76 +157,27 @@ public class GameManager : MonoBehaviour
         }
 
         //while shift is being held down
-        if(shiftDown)
+        if (shiftDown)
         {
             float elapsedTime = Time.time - time;
-            
-            if(elapsedTime >= 3)
+
+            if (elapsedTime >= 3)
             {
-                lives-=2;
+                lives -= 2;
                 sheepManager.KillSheep(2);
                 time = Time.time;
             }
 
         }
+    }
 
-        //when player hits the pose button
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            audioManager.PlaySFX(audioManager.twerk);
-
-            int iterations = combo / 8; //check if their combo is high enough to gain sheep
-            int gainedLives = 0;        //variable to count how many lives they gained
-
-            //use fibinache sequence to calculate how many sheep/lives to add
-            int prev = 0;
-            int next = 1;
-
-            for (int i = 0; i < iterations; i++)
-            {
-                gainedLives = prev + next;
-
-                if(gainedLives >= 55)
-                {
-                    break;
-                }
-
-                prev = next;
-                next = gainedLives;
-            }
-
-            //add the amount of lives they gained
-            lives += gainedLives;
-
-            //ensure the sheep manager and player exist
-            if (sheepManager && player)
-            {
-                //cap spawning 55 sheep
-                if(lives < 55)
-                {
-                    sheepManager.SubmitCombo(gainedLives); //add sheep to represent lives
-                } 
-
-                PoseParticle();                            //instantiate the pose particles
-            }
-
-            combo = 0; //reset their combo to zero
-            StopAllCoroutines();
-            StartCoroutine(activate(1f));
-        }
-
-        //make sure that the combo text and sheep text exist
-        if (comboTxt && sheepTxt)
-        {
-            comboTxt.text = combo.ToString();               //update the combo text string
-            sheepTxt.text = "Sheep: " + lives.ToString();   //update the sheep text string
-        }
-
+    private void checkWrongKeyPress()
+    {
         //bool helps keep track of if the player has hit the wrong key
         bool wrongKey = false;
 
         //check if all they pressed a keycode corisponding to an activator that isn't active
-        for(int i = 0; i < existingKeys.Length; i++)
+        for (int i = 0; i < existingKeys.Length; i++)
         {
             //first time they have hit a key for an inactive activator, break the loop and set wrong key to false
             if (Input.GetKeyDown(existingKeys[i]) && !keyActivators[i].activeSelf)
@@ -198,12 +195,58 @@ public class GameManager : MonoBehaviour
                 if (keyActivators[i].activeSelf)
                 {
                     keyActivators[i].GetComponent<CircleActivator>().missed();
-                    keyActivators[i].SetActive(false);
-                    keyActivators[i].GetComponent<Transform>().localScale = Vector3.zero;
+                    keyActivators[i].GetComponent<CircleActivator>().resetActivator();
                 }
             }
         }
-        
+    }
+
+    private void checkComboSubmit()
+    {
+        //when player hits the pose button
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            audioManager.PlaySFX(audioManager.twerk);
+
+            int iterations = combo / 8; //check if their combo is high enough to gain sheep
+            int gainedLives = 0;        //variable to count how many lives they gained
+
+            //use fibinache sequence to calculate how many sheep/lives to add
+            int prev = 0;
+            int next = 1;
+
+            for (int i = 0; i < iterations; i++)
+            {
+                gainedLives = prev + next;
+
+                if (gainedLives >= 55)
+                {
+                    break;
+                }
+
+                prev = next;
+                next = gainedLives;
+            }
+
+            //add the amount of lives they gained
+            lives += gainedLives;
+
+            //ensure the sheep manager and player exist
+            if (sheepManager && player)
+            {
+                //cap spawning 55 sheep
+                if (lives < 55)
+                {
+                    sheepManager.SubmitCombo(gainedLives); //add sheep to represent lives
+                }
+
+                PoseParticle();                            //instantiate the pose particles
+            }
+
+            combo = 0; //reset their combo to zero
+            StopAllCoroutines();
+            StartCoroutine(activate(1f));
+        }
     }
 
     IEnumerator activate(float waitTime)

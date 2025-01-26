@@ -85,15 +85,13 @@ public class CircleActivator : MonoBehaviour
                 StopAllCoroutines();
             }
 
-            circleIndicator.localScale = Vector3.zero;
-            gameObject.SetActive(false);
+            resetActivator();
             
         }
 
         if(Input.GetKeyDown(KeyCode.LeftShift) ||  Input.GetKeyDown(KeyCode.RightShift))
         {
-            circleIndicator.localScale = Vector3.zero;
-            gameObject.SetActive(false);
+            resetActivator();
         }
     }
 
@@ -108,6 +106,12 @@ public class CircleActivator : MonoBehaviour
     public KeyCode getKeyCode()
     {
         return keyToPress;
+    }
+
+    public void resetActivator ()
+    {
+        gameObject.SetActive(false);
+        circleIndicator.localScale = Vector3.zero;
     }
 
 }
