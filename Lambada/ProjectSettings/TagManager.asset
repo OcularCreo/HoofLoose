@@ -43,6 +43,21 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: background
+    uniqueID: 1583839381
+    locked: 0
+  - name: moon+stars
+    uniqueID: 3670994139
+    locked: 0
+  - name: bg_sheep
+    uniqueID: 1865109033
+    locked: 0
+  - name: player_sheep
+    uniqueID: 4064962421
+    locked: 0
+  - name: ui
+    uniqueID: 1149785111
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
