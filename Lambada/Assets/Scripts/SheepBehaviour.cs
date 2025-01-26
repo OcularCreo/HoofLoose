@@ -15,6 +15,9 @@ public class SheepBehaviour : MonoBehaviour
     private Color danceColour = Color.white;
     private Color grazeColour = new Color(183, 183, 183);
 
+    [SerializeField] private Sprite mainPose;
+    [SerializeField] private Sprite bobPose;
+
 
     //STATES
     public enum SheepState
@@ -114,6 +117,15 @@ public class SheepBehaviour : MonoBehaviour
             {
                 GetComponent<BouncyScript>().Bounce();
             }
+
+            if (gameObject.GetComponent<SpriteRenderer>().sprite == mainPose) 
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = bobPose;
+            }
+            else if (gameObject.GetComponent<SpriteRenderer>().sprite == bobPose)
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = mainPose;
+            }
         }
     }
 
@@ -141,6 +153,8 @@ public class SheepBehaviour : MonoBehaviour
 
     public void TransitionToGrazeState()
     {
+        gameObject.GetComponent<SpriteRenderer>().sprite = mainPose;
+
         currentState = SheepState.Graze;
         ChooseNewGrazePoint();
         gameObject.GetComponent<SpriteRenderer>().color = grazeColour;
