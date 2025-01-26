@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SheepSpawner : MonoBehaviour
@@ -5,14 +6,16 @@ public class SheepSpawner : MonoBehaviour
     // Reference to the Sheep prefab
     [SerializeField] private GameObject sheepPrefab;
 
+    [SerializeField] private SheepManager sheepManager;
+
     // The boundaries within which the sheep will spawn
     [SerializeField] private float minX = -8f;
     [SerializeField] private float maxX = 8f;
     [SerializeField] private float minY = -4f;
     [SerializeField] private float maxY = 4f;
 
-    private string sheepTag = "Sheep"; // Tag to identify sheep
-    private int maxSheepCount = 9; // Maximum number of sheep allowed in the scene
+    //private string sheepTag = "Sheep"; // Tag to identify sheep
+    private int maxSheepCount = 10; // Maximum number of sheep allowed in the scene
     private float spawnInterval = 5f; // Initial time interval for spawning sheep
     private float intervalDecrement = 0.1f; // How much the interval will decrease over time
     private float minInterval = 1f; // Minimum spawn interval
@@ -24,13 +27,19 @@ public class SheepSpawner : MonoBehaviour
     {
         currentInterval = spawnInterval; // Set the initial interval
         timeSinceLastSpawn = 0f; // Initialize the timer
+
+        if (!sheepManager) 
+        {
+            sheepManager = GameObject.FindGameObjectWithTag("SheepManager").GetComponent<SheepManager>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         // Count the number of sheep in the scene
-        int sheepCount = GameObject.FindGameObjectsWithTag(sheepTag).Length;
+        int sheepCount = sheepManager.GetNumberStateSheep(SheepBehaviour.SheepState.Graze);
+        //Debug.Log(sheepCount);
 
         // If the number of sheep is less than the maximum, attempt to spawn a new one
         if (sheepCount < maxSheepCount)

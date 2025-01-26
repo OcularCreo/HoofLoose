@@ -40,10 +40,10 @@ public class CircleActivator : MonoBehaviour
             bool success = false;
 
             //check what percentage the size the indicator is relative to the static circle
-            if(scalePercentage < 0.6)
+            if(scalePercentage < 0.7)
             {
                 missed();
-            } else if(scalePercentage >= 0.6 && scalePercentage < 0.85)
+            } else if(scalePercentage >= 0.7 && scalePercentage < 0.85)
             {
                 Instantiate(goodParticle, particleSpawnTrans.position, Quaternion.identity);
                 gameManager.combo += 1;
@@ -55,13 +55,13 @@ public class CircleActivator : MonoBehaviour
                 gameManager.combo += 1;
                 success = true;
 
-            } else if(scalePercentage >= 0.9 && scalePercentage <= 1.05)
+            } else if(scalePercentage >= 0.9 && scalePercentage <= 1.1)
             {
                 gameManager.combo += 2;
                 Instantiate(perfectParticle, particleSpawnTrans.position, Quaternion.identity);
                 success = true;
             } 
-            else if (scalePercentage > 1.05)
+            else if (scalePercentage > 1.1)
             {
                 missed();
             }

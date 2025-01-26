@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 253702618886028174}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -12.7, z: 0}
-  m_LocalScale: {x: 10.902016, y: 1.3912108, z: 3.9051533}
+  m_LocalPosition: {x: 0, y: -12.51, z: 0}
+  m_LocalScale: {x: 10.902016, y: 2.6317534, z: 3.9051533}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8015799192647494281}
@@ -70,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1865109033
+  m_SortingLayer: -3
   m_SortingOrder: -1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.5294118}
@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 8015799192647494281}
   - component: {fileID: 808820891007146652}
   - component: {fileID: 888555874900998995}
-  - component: {fileID: 1017935923708166896}
   - component: {fileID: 3100555637043301543}
   - component: {fileID: 2443092963864673892}
   m_Layer: 0
@@ -160,10 +159,10 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1865109033
-  m_SortingLayer: 3
+  m_SortingLayer: -3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a5443c498a71f914a95302f6622783d4, type: 3}
-  m_Color: {r: 0.5749436, g: 0.8050314, b: 0.5392191, a: 1}
+  m_Sprite: {fileID: 21300000, guid: c091ecd03029d124783cfcf4e63618bf, type: 3}
+  m_Color: {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -200,41 +199,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &1017935923708166896
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5762891991001760034}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1.15
 --- !u!114 &3100555637043301543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84c237167707a1e45a28f11e7b7a690f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetGrowthPercent: 1.4
+  targetGrowthPercent: 1.1
   lerpDurationX: 0.05
   lerpDurationY: 0.05
   delayBeforeX: 0.03

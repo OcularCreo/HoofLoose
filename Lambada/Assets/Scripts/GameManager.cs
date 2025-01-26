@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI comboTxt;
     [SerializeField] private TextMeshProUGUI sheepTxt;
-
+   
     private List<GameObject> keyActivatorsList;
     private bool shiftDown;
 
@@ -81,7 +82,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
         {
             shiftDown = true;
-            StopCoroutine("activate");
+            StopAllCoroutines();
             time = Time.time;
 
         } else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
@@ -120,6 +121,12 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < iterations; i++)
             {
                 gainedLives = prev + next;
+
+                if(gainedLives >= 55)
+                {
+                    break;
+                }
+
                 prev = next;
                 next = gainedLives;
             }
@@ -135,7 +142,7 @@ public class GameManager : MonoBehaviour
 
         if (comboTxt && sheepTxt)
         {
-            comboTxt.text = "Combo: " + combo.ToString();
+            comboTxt.text = combo.ToString();
             sheepTxt.text = "Sheep: " + lives.ToString();
         }
     }
@@ -153,7 +160,7 @@ public class GameManager : MonoBehaviour
             // 40% chance of double key press
             if (Random.value <= 0.3)
             {
-                StartCoroutine(activateSecondary(0.25f));
+                StartCoroutine(activateSecondary(0f));
             }
 
             StartCoroutine(activate(1.25f));

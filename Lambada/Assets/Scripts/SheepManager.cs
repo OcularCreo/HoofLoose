@@ -74,23 +74,8 @@ public class SheepManager : MonoBehaviour
 
     public void SubmitCombo(int comboVal) 
     {
-        // Find all sheep with the "Sheep" tag
-        sheepList = GameObject.FindGameObjectsWithTag("Sheep");
-
         // Create a list of sheep that are in the "Dance" state
-        var grazingSheep = new System.Collections.Generic.List<Transform>();
-
-        foreach (var sheep in sheepList)
-        {
-            SheepBehaviour.SheepState sheepState = sheep.GetComponent<SheepBehaviour>().GetState();
-            if (sheepState == SheepBehaviour.SheepState.Graze)
-            {
-                grazingSheep.Add(sheep.transform);
-            }
-        }
-
-        //Debug.Log(CountDancingSheep());
-        //Debug.Log(grazingSheep.Count);
+        var grazingSheep = GetAllStateSheep(SheepBehaviour.SheepState.Graze);
 
         for (int i = 0; i < comboVal; i++) 
         {
@@ -108,20 +93,8 @@ public class SheepManager : MonoBehaviour
 
     public void KillSheep(int sheepToKill) 
     {
-        // Find all sheep with the "Sheep" tag
-        sheepList = GameObject.FindGameObjectsWithTag("Sheep");
-
         // Create a list of sheep that are in the "Dance" state
-        var dancingSheep = new System.Collections.Generic.List<Transform>();
-
-        foreach (var sheep in sheepList)
-        {
-            SheepBehaviour.SheepState sheepState = sheep.GetComponent<SheepBehaviour>().GetState();
-            if (sheepState == SheepBehaviour.SheepState.Dance)
-            {
-                dancingSheep.Add(sheep.transform);
-            }
-        }
+        var dancingSheep = GetAllStateSheep(SheepBehaviour.SheepState.Dance);
 
         for (int i = 0; i < sheepToKill; i++)
         {
@@ -138,5 +111,53 @@ public class SheepManager : MonoBehaviour
         }
 
         //Debug.Log("Attempted to kill " + sheepToKill + " sheep");
+    }
+
+    public GameObject GetRandomStateSheep(SheepBehaviour.SheepState state) 
+    {
+        GameObject theChosenOne;
+
+        // Create a list of sheep that are in the "Dance" state
+        var stateList = GetAllStateSheep(state);
+
+        if (stateList.Count > 0) 
+        {
+            int randomSheep = Random.Range(0, stateList.Count);
+
+            theChosenOne = stateList[randomSheep];
+
+            return theChosenOne;
+        }
+        else 
+        {
+            return null;
+        }
+    }
+
+    public int GetNumberStateSheep(SheepBehaviour.SheepState state)
+    {
+        int numSheep = GetAllStateSheep(state).Count;
+
+        return numSheep;
+    }
+
+    public List<GameObject> GetAllStateSheep(SheepBehaviour.SheepState state)
+    {
+        // Find all sheep with the "Sheep" tag
+        sheepList = GameObject.FindGameObjectsWithTag("Sheep");
+
+        // Create a list of sheep that are in the "Dance" state
+        var stateList = new System.Collections.Generic.List<GameObject>();
+
+        foreach (var sheep in sheepList)
+        {
+            SheepBehaviour.SheepState sheepState = sheep.GetComponent<SheepBehaviour>().GetState();
+            if (sheepState == state)
+            {
+                stateList.Add(sheep);
+            }
+        }
+
+        return stateList;
     }
 }
