@@ -25,9 +25,12 @@ public class Wolf : MonoBehaviour
 
     private Vector3 escapePos = new Vector3(11f, 0f, 0f);
 
+    private bool hasChangedDirection = false;
+
 
     private void Start()
     {
+        gameObject.transform.rotation = Quaternion.Euler(transform.rotation.x, 180f, transform.rotation.z);
         if (!sheepManager) 
         {
             sheepManager = GameObject.FindGameObjectWithTag("SheepManager").GetComponent<SheepManager>();
@@ -104,6 +107,14 @@ public class Wolf : MonoBehaviour
             sheepRemoved = true;
         }
 
+        if (!hasChangedDirection) 
+        {
+            hasChangedDirection = true;
+            ChangeDirection();
+        }
+        
+
+
         //run off screen
         Vector2 direction = (escapePos - transform.position).normalized;
 
@@ -154,5 +165,13 @@ public class Wolf : MonoBehaviour
     private void Die() 
     {
         Destroy(gameObject);
+    }
+
+    private void ChangeDirection() 
+    {
+        gameObject.GetComponent<BouncyScript>().Bounce();
+        gameObject.transform.rotation = Quaternion.Euler(transform.rotation.x, 0f, transform.rotation.z);
+        //Vector3 newRot = gameObject.transform.rotation;
+        //gameObject.transform.localScale = new Vector3(-1 * (newScale.x), newScale.y, newScale.z);
     }
 }
