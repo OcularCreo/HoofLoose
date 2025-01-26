@@ -121,6 +121,12 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < iterations; i++)
             {
                 gainedLives = prev + next;
+
+                if(gainedLives >= 55)
+                {
+                    break;
+                }
+
                 prev = next;
                 next = gainedLives;
             }
@@ -136,7 +142,7 @@ public class GameManager : MonoBehaviour
 
         if (comboTxt && sheepTxt)
         {
-            comboTxt.text = "Combo: " + combo.ToString();
+            comboTxt.text = combo.ToString();
             sheepTxt.text = "Sheep: " + lives.ToString();
         }
     }

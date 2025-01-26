@@ -21,18 +21,15 @@ public class PlayerSpriteChanger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (Input.anyKeyDown && danceSprites != null) 
-        {
-            NextSprite();
-        }*/
-
-        for (int i = 0; i < keycode.Length; i++) 
+        
+        for(int i = 0; i < keycode.Length; i++)
         {
             if (Input.GetKeyDown(keycode[i]))
             {
-                NextSprite();
+                spriteRenderer.sprite = danceSprites[i];
             }
         }
+
     }
 
     void NextSprite() 
