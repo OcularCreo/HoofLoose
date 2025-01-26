@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,16 +30,22 @@ public class Wolf : MonoBehaviour
 
     private GameManager gameManager;
 
+    [SerializeField] private GameObject textCanvas;
+    [SerializeField] private TextMeshProUGUI text;
+
 
     private void Start()
     {
         gameObject.transform.rotation = Quaternion.Euler(transform.rotation.x, 180f, transform.rotation.z);
+        textCanvas.transform.rotation = Quaternion.Euler(textCanvas.transform.rotation.x, 180f, textCanvas.transform.rotation.z);
         if (!sheepManager) 
         {
             sheepManager = GameObject.FindGameObjectWithTag("SheepManager").GetComponent<SheepManager>();
         }
 
         gameManager = GameObject.FindObjectOfType<GameManager>();
+
+        text.text = "x" + sheepToSteal;
     }
     void Update()
     {
@@ -189,6 +196,7 @@ public class Wolf : MonoBehaviour
     {
         gameObject.GetComponent<BouncyScript>().Bounce();
         gameObject.transform.rotation = Quaternion.Euler(transform.rotation.x, 0f, transform.rotation.z);
+        textCanvas.transform.rotation = Quaternion.Euler(textCanvas.transform.rotation.x, 0f, textCanvas.transform.rotation.z);
         //Vector3 newRot = gameObject.transform.rotation;
         //gameObject.transform.localScale = new Vector3(-1 * (newScale.x), newScale.y, newScale.z);
     }
