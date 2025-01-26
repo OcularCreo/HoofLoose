@@ -1243,7 +1243,7 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 20.14
+  m_PointLightInnerAngle: 53.7
   m_PointLightOuterAngle: 78.51
   m_PointLightInnerRadius: 0
   m_PointLightOuterRadius: 8.805336
@@ -1609,7 +1609,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.43
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 93.19
+  m_Intensity: 2.85
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 9578675e
@@ -1628,7 +1628,7 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 20.14
+  m_PointLightInnerAngle: 53.6
   m_PointLightOuterAngle: 78.51
   m_PointLightInnerRadius: 0
   m_PointLightOuterRadius: 8.805336
@@ -1949,7 +1949,7 @@ SpriteRenderer:
   m_SortingLayerID: 1583839381
   m_SortingLayer: -5
   m_SortingOrder: -5
-  m_Sprite: {fileID: 21300000, guid: e48d6fc26e09509469a91d28922dbeab, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7bf5b36d779455544a8f6eca2ac66c49, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
