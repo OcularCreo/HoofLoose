@@ -4,6 +4,7 @@ using TMPro;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -38,10 +39,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioManager audioManager;
 
     // bubble butt stuff
-    private int twerkCount;
+    public int twerkCount;
     [SerializeField] private float amountToTwerk;
-    private bool spaceKeyJustPressed;
+    public bool spaceKeyJustPressed;
     public bool win;
+
+    [SerializeField] private UnityEngine.UI.Slider slider;
 
     [SerializeField] private GameObject scoreCanvas;
 
@@ -89,6 +92,7 @@ public class GameManager : MonoBehaviour
         twerkCount = 0;
         spaceKeyJustPressed = false;
         win = false;
+        slider.maxValue = amountToTwerk;
     }
 
     private void resetKeyList()
@@ -380,7 +384,8 @@ public class GameManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 twerkCount += 1;
-                Debug.Log("twerked: " + twerkCount);
+                slider.value = twerkCount;
+                //Debug.Log("twerked: " + twerkCount);
             }
         }
 
