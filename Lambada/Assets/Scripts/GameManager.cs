@@ -32,6 +32,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] AudioManager audioManager;
 
+    // bubble butt stuff
+    private int twerkCount;
+    private bool spaceKeyJustPressed;
+    public bool win;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,7 +67,12 @@ public class GameManager : MonoBehaviour
         comboTxt.text = "";
         sheepTxt.text = "";
 
-    }
+        // bubble butt stuff
+        twerkCount = 0;
+        spaceKeyJustPressed = false;
+        win = false;
+
+}
 
     private void resetKeyList()
     {
@@ -119,7 +129,9 @@ public class GameManager : MonoBehaviour
 
                 handleShiftInput();
                 checkWrongKeyPress();
+                BubbleButt();
                 checkComboSubmit();
+                
             }
 
             
@@ -203,49 +215,61 @@ public class GameManager : MonoBehaviour
 
     private void checkComboSubmit()
     {
-        //when player hits the pose button
-        if (Input.GetKeyDown(KeyCode.Space))
+        // if any key is pressed 
+        if (Input.anyKeyDown)
         {
-            audioManager.PlaySFX(audioManager.twerk);
-
-            int iterations = combo / 8; //check if their combo is high enough to gain sheep
-            int gainedLives = 0;        //variable to count how many lives they gained
-
-            //use fibinache sequence to calculate how many sheep/lives to add
-            int prev = 0;
-            int next = 1;
-
-            for (int i = 0; i < iterations; i++)
+            //when player hits the pose button
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                gainedLives = prev + next;
+                audioManager.PlaySFX(audioManager.twerk);
 
-                if (gainedLives >= 55)
+                int iterations = combo / 8; //check if their combo is high enough to gain sheep
+                int gainedLives = 0;        //variable to count how many lives they gained
+
+                //use fibinache sequence to calculate how many sheep/lives to add
+                int prev = 0;
+                int next = 1;
+
+                for (int i = 0; i < iterations; i++)
                 {
-                    break;
+                    gainedLives = prev + next;
+
+                    if (gainedLives >= 55)
+                    {
+                        break;
+                    }
+
+                    prev = next;
+                    next = gainedLives;
                 }
 
-                prev = next;
-                next = gainedLives;
-            }
+                //add the amount of lives they gained
+                lives += gainedLives;
 
-            //add the amount of lives they gained
-            lives += gainedLives;
-
-            //ensure the sheep manager and player exist
-            if (sheepManager && player)
-            {
-                //cap spawning 55 sheep
-                if (lives < 55)
+                //ensure the sheep manager and player exist
+                if (sheepManager && player)
                 {
-                    sheepManager.SubmitCombo(gainedLives); //add sheep to represent lives
+                    //cap spawning 55 sheep
+                    if (lives < 55)
+                    {
+                        sheepManager.SubmitCombo(gainedLives); //add sheep to represent lives
+                    }
+
+                    PoseParticle();                            //instantiate the pose particles
                 }
 
-                PoseParticle();                            //instantiate the pose particles
-            }
+                // bubble butt
+                spaceKeyJustPressed = true;
 
-            combo = 0; //reset their combo to zero
-            StopAllCoroutines();
-            StartCoroutine(activate(1f));
+                combo = 0; //reset their combo to zero
+                StopAllCoroutines();
+                StartCoroutine(activate(1f));
+            }
+            else
+            {
+                // if a key is pressed that isn't the space bar
+                spaceKeyJustPressed = false;
+            }
         }
     }
 
@@ -292,5 +316,25 @@ public class GameManager : MonoBehaviour
     public GameObject[] getActivators()
     {
         return keyActivators;
+    }
+
+    // bubble butt function
+    public void BubbleButt()
+    {
+        // if player hits space button more than once in a row, add to twerk count
+        if (spaceKeyJustPressed)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                twerkCount += 1;
+                Debug.Log("twerked: " + twerkCount);
+            }
+        }
+
+        // if player reaches the amount of twerks to win
+        if(twerkCount >= 10) // i made it 10 for now for testing
+        {
+            win = true;
+        }
     }
 }
