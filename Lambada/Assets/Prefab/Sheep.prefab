@@ -296,6 +296,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90278f73f4b9cc4da0c0b27c10138f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainPose: {fileID: 21300000, guid: c091ecd03029d124783cfcf4e63618bf, type: 3}
+  bobPose: {fileID: 21300000, guid: 2e53656ac52b8324ca9291595bb5438d, type: 3}
 --- !u!114 &2443092963864673892
 MonoBehaviour:
   m_ObjectHideFlags: 0

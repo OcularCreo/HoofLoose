@@ -22,7 +22,23 @@ public class AudioManager : MonoBehaviour
 	public AudioClip good;
 	public AudioClip miss;
 
-	private void Start()
+
+    public static AudioManager instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
     {
         musicSource.clip = backgroundMusic;
         musicSource.Play();

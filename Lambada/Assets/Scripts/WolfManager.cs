@@ -7,7 +7,7 @@ public class WolfManager : MonoBehaviour
     // Timer duration
     private float totalTime = 25f; // Time before wolf comes
     private float timeRemaining = 25f;
-    private bool isTimerRunning = true;
+    private bool isTimerRunning = false;
 
     private int sheepToSteal = 1;
 
@@ -46,5 +46,14 @@ public class WolfManager : MonoBehaviour
     {
         GameObject wolf = Instantiate(wolfPrefab, spawnPos, Quaternion.identity);
         wolf.GetComponent<Wolf>().sheepToSteal = stealAmount;
+    }
+
+    public void StartTimer() 
+    {
+        if (!isTimerRunning) 
+        {
+            isTimerRunning = true;
+            //Debug.Log("Wolf timer started");
+        }
     }
 }
