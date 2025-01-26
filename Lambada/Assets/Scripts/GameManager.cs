@@ -26,9 +26,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private ParticleSystem poseParticle;
     private GameObject player;
 
+    [SerializeField] AudioManager audioManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+
         if (sheepManager == null)
         {
             sheepManager = GameObject.FindGameObjectWithTag("SheepManager").GetComponent<SheepManager>();
@@ -82,12 +86,16 @@ public class GameManager : MonoBehaviour
         //staring mechanic controls
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
         {
+            audioManager.PlaySong(audioManager.wtf);
+
             shiftDown = true;       //set shift down to true
             StopAllCoroutines();    //stop all coroutines
             time = Time.time;       //log the first time
 
         } else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
         {
+            audioManager.PlaySong(audioManager.backgroundMusic);
+
             shiftDown = false;
             StartCoroutine(activate(0));
             time = 0;
@@ -110,6 +118,7 @@ public class GameManager : MonoBehaviour
         //when player hits the pose button
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            audioManager.PlaySFX(audioManager.twerk);
 
             int iterations = combo / 8; //check if their combo is high enough to gain sheep
             int gainedLives = 0;        //variable to count how many lives they gained

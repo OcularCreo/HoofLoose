@@ -21,12 +21,15 @@ public class CircleActivator : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI keyText;
 
-    // Start is called before the first frame update
-    void Start()
+	AudioManager audioManager;
+
+	// Start is called before the first frame update
+	void Start()
     {
         circleIndicator.GetComponent<Transform>().localScale = Vector3.zero;
         keyText.text = keyToPress.ToString();
-    }
+		audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+	}
 
     // Update is called once per frame
     void Update()
@@ -43,28 +46,33 @@ public class CircleActivator : MonoBehaviour
             if(scalePercentage < 0.7)
             {
                 missed();
-            } else if(scalePercentage >= 0.7 && scalePercentage < 0.85)
+				audioManager.PlaySFX(audioManager.miss);
+			} else if(scalePercentage >= 0.7 && scalePercentage < 0.85)
             {
                 Instantiate(goodParticle, particleSpawnTrans.position, Quaternion.identity);
                 gameManager.combo += 1;
                 success = true;
-               
-            } else if(scalePercentage >= 0.85 && scalePercentage <0.9)
+				audioManager.PlaySFX(audioManager.good);
+
+			} else if(scalePercentage >= 0.85 && scalePercentage <0.9)
             {
                 Instantiate(greatParticle, particleSpawnTrans.position, Quaternion.identity);
                 gameManager.combo += 1;
                 success = true;
+				audioManager.PlaySFX(audioManager.great);
 
-            } else if(scalePercentage >= 0.9 && scalePercentage <= 1.1)
+			} else if(scalePercentage >= 0.9 && scalePercentage <= 1.1)
             {
                 gameManager.combo += 2;
                 Instantiate(perfectParticle, particleSpawnTrans.position, Quaternion.identity);
                 success = true;
+                audioManager.PlaySFX(audioManager.perfect);
             } 
             else if (scalePercentage > 1.1)
             {
                 missed();
-            }
+				audioManager.PlaySFX(audioManager.miss);
+			}
 
             //if the player successful in any way and the fail counter is greater than 0
             if(success)
