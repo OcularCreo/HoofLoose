@@ -13,10 +13,13 @@ public class SheepManager : MonoBehaviour
 
     private GameObject[] sheepList;
 
+    private WolfManager wolfManager;
+    private bool wolfTimerStarted = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        wolfManager = GameObject.FindObjectOfType<WolfManager>();
     }
 
     // Update is called once per frame
@@ -74,6 +77,12 @@ public class SheepManager : MonoBehaviour
 
     public void SubmitCombo(int comboVal) 
     {
+        if (!wolfTimerStarted && wolfManager) 
+        {
+            wolfTimerStarted = true;
+            wolfManager.StartTimer();
+        }
+
         // Create a list of sheep that are in the "Dance" state
         var grazingSheep = GetAllStateSheep(SheepBehaviour.SheepState.Graze);
 
