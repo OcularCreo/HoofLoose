@@ -302,12 +302,12 @@ public class GameManager : MonoBehaviour
                 int gainedLives = 0;        //variable to count how many lives they gained
 
                 //use fibonacci sequence to calculate how many sheep/lives to add
-                int prev = 0;
+                int prev = 1;
                 int next = 1;
 
                 for (int i = 0; i < iterations; i++)
                 {
-                    gainedLives = prev + next;
+                    gainedLives = prev + next - 1;
 
                     if (gainedLives >= 55)
                     {
@@ -315,7 +315,7 @@ public class GameManager : MonoBehaviour
                     }
 
                     prev = next;
-                    next = gainedLives;
+                    next = gainedLives + 1;
                 }
 
                 //add the amount of lives they gained
