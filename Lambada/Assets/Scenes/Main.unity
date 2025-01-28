@@ -4680,7 +4680,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1869902248}
   - component: {fileID: 1869902250}
-  - component: {fileID: 1869902249}
   m_Layer: 5
   m_Name: Bubble butt bar
   m_TagString: Untagged
@@ -4710,20 +4709,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -221}
   m_SizeDelta: {x: 800, y: 11.251312}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1869902249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1869902247}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1629a350127af041982982e44c5b707, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 1869902250}
-  gameManager: {fileID: 2095762386}
 --- !u!114 &1869902250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5478,6 +5463,7 @@ GameObject:
   - component: {fileID: 2056347282}
   - component: {fileID: 2056347281}
   - component: {fileID: 2056347280}
+  - component: {fileID: 2056347283}
   m_Layer: 5
   m_Name: ComboSign
   m_TagString: Untagged
@@ -5564,6 +5550,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2056347278}
   m_CullTransparentMesh: 1
+--- !u!114 &2056347283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2056347278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d20bc032b44cc134f8aef5f320a54ac9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signAnimator: {fileID: 2056347280}
+  gameManager: {fileID: 2095762387}
 --- !u!1 &2092312613
 GameObject:
   m_ObjectHideFlags: 0
