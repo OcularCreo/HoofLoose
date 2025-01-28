@@ -250,8 +250,8 @@ public class GameManager : MonoBehaviour
 
             if (elapsedTime >= 4.5)
             {
-                lives -= 2;
-                sheepManager.KillSheep(2);
+                lives -= 1;
+                sheepManager.KillSheep(1);
                 time = Time.time;
             }
 
