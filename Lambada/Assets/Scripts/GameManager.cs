@@ -248,7 +248,7 @@ public class GameManager : MonoBehaviour
         {
             float elapsedTime = Time.time - time;
 
-            if (elapsedTime >= 3)
+            if (elapsedTime >= 4.5)
             {
                 lives -= 2;
                 sheepManager.KillSheep(2);
