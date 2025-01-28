@@ -301,7 +301,7 @@ public class GameManager : MonoBehaviour
                 int iterations = combo / 8; //check if their combo is high enough to gain sheep
                 int gainedLives = 0;        //variable to count how many lives they gained
 
-                //use fibinache sequence to calculate how many sheep/lives to add
+                //use fibonacci sequence to calculate how many sheep/lives to add
                 int prev = 0;
                 int next = 1;
 
